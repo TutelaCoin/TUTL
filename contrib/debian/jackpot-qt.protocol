@@ -1,0 +1,11 @@
+[Protocol]
+exec=tutela-qt '%u'
+protocol=tutela
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Tutela 
+Comment=Tutela P2P Cryptocurrency
+Comment[fr]=Tutela, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Tutela, eşten eşe kriptografik sanal para birimi
+Exec=tutela-qt %u
+Terminal=false
+Type=Application
+Icon=pivx128
+MimeType=x-scheme-handler/tutela;
+Categories=Office;Finance;
+StartupWMClass=tutela-qt
