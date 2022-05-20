@@ -1,25 +1,20 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "data/tx_invalid.json.h"
 #include "data/tx_valid.json.h"
-#include "test/test_pivx.h"
+#include "test/test_tutela.h"
 
-#include "consensus/tx_verify.h"
 #include "clientversion.h"
-#include "checkqueue.h"
 #include "key.h"
 #include "keystore.h"
 #include "main.h"
-#include "policy/policy.h"
 #include "script/script.h"
 #include "script/script_error.h"
-#include "script/sign.h"
 #include "core_io.h"
-#include "test_pivx.h"
+#include "test_tutela.h"
 
 #include <map>
 #include <string>
@@ -143,7 +138,6 @@ BOOST_AUTO_TEST_CASE(tx_valid)
             BOOST_CHECK_MESSAGE(CheckTransaction(tx, false, false, state), strTest);
             BOOST_CHECK(state.IsValid());
 
-            PrecomputedTransactionData precomTxData(tx);
             for (unsigned int i = 0; i < tx.vin.size(); i++)
             {
                 if (!mapprevOutScriptPubKeys.count(tx.vin[i].prevout))
@@ -152,10 +146,9 @@ BOOST_AUTO_TEST_CASE(tx_valid)
                     break;
                 }
 
-                CAmount amount = 0;
                 unsigned int verify_flags = ParseScriptFlags(test[2].get_str());
                 BOOST_CHECK_MESSAGE(VerifyScript(tx.vin[i].scriptSig, mapprevOutScriptPubKeys[tx.vin[i].prevout],
-                                                 verify_flags, TransactionSignatureChecker(&tx, i, amount, precomTxData), &err),
+                                                 verify_flags, TransactionSignatureChecker(&tx, i), &err),
                                     strTest);
                 BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
             }
@@ -219,7 +212,6 @@ BOOST_AUTO_TEST_CASE(tx_invalid)
             CValidationState state;
             fValid = CheckTransaction(tx, false, false, state) && state.IsValid();
 
-            PrecomputedTransactionData precomTxData(tx);
             for (unsigned int i = 0; i < tx.vin.size() && fValid; i++)
             {
                 if (!mapprevOutScriptPubKeys.count(tx.vin[i].prevout))
@@ -228,10 +220,9 @@ BOOST_AUTO_TEST_CASE(tx_invalid)
                     break;
                 }
 
-                CAmount amount = 0;
                 unsigned int verify_flags = ParseScriptFlags(test[2].get_str());
                 fValid = VerifyScript(tx.vin[i].scriptSig, mapprevOutScriptPubKeys[tx.vin[i].prevout],
-                                      verify_flags, TransactionSignatureChecker(&tx, i, amount, precomTxData), &err);
+                                      verify_flags, TransactionSignatureChecker(&tx, i), &err);
             }
             BOOST_CHECK_MESSAGE(!fValid, strTest);
             BOOST_CHECK_MESSAGE(err != SCRIPT_ERR_OK, ScriptErrorString(err));
@@ -281,14 +272,14 @@ SetupDummyInputs(CBasicKeyStore& keystoreRet, CCoinsViewCache& coinsRet)
     dummyTransactions[0].vout[0].scriptPubKey << ToByteVector(key[0].GetPubKey()) << OP_CHECKSIG;
     dummyTransactions[0].vout[1].nValue = 50*CENT;
     dummyTransactions[0].vout[1].scriptPubKey << ToByteVector(key[1].GetPubKey()) << OP_CHECKSIG;
-    AddCoins(coinsRet, dummyTransactions[0], 0);
+    coinsRet.ModifyCoins(dummyTransactions[0].GetHash())->FromTx(dummyTransactions[0], 0);
 
     dummyTransactions[1].vout.resize(2);
     dummyTransactions[1].vout[0].nValue = 21*CENT;
     dummyTransactions[1].vout[0].scriptPubKey = GetScriptForDestination(key[2].GetPubKey().GetID());
     dummyTransactions[1].vout[1].nValue = 22*CENT;
     dummyTransactions[1].vout[1].scriptPubKey = GetScriptForDestination(key[3].GetPubKey().GetID());
-    AddCoins(coinsRet, dummyTransactions[1], 0);
+    coinsRet.ModifyCoins(dummyTransactions[1].GetHash())->FromTx(dummyTransactions[1], 0);
 
     return dummyTransactions;
 }
@@ -325,86 +316,6 @@ BOOST_AUTO_TEST_CASE(test_Get)
     // ... as should not having enough:
     t1.vin[0].scriptSig = CScript();
     BOOST_CHECK(!AreInputsStandard(t1, coins));
-}
-
-BOOST_AUTO_TEST_CASE(test_big_witness_transaction) {
-    CMutableTransaction mtx;
-    mtx.nVersion = 2;
-
-    CKey key;
-    key.MakeNewKey(false);
-    CBasicKeyStore keystore;
-    keystore.AddKeyPubKey(key, key.GetPubKey());
-    CKeyID hash = key.GetPubKey().GetID();
-    CScript scriptPubKey = GetScriptForDestination(hash);
-
-    std::vector<int> sigHashes;
-    sigHashes.push_back(SIGHASH_NONE | SIGHASH_ANYONECANPAY);
-    sigHashes.push_back(SIGHASH_SINGLE | SIGHASH_ANYONECANPAY);
-    sigHashes.push_back(SIGHASH_ALL | SIGHASH_ANYONECANPAY);
-    sigHashes.push_back(SIGHASH_NONE);
-    sigHashes.push_back(SIGHASH_SINGLE);
-    sigHashes.push_back(SIGHASH_ALL);
-
-    // create a big transaction of 4500 inputs signed by the same key
-    for(uint32_t ij = 0; ij < 4500; ij++) {
-        uint32_t i = mtx.vin.size();
-        uint256 prevId;
-        prevId.SetHex("0000000000000000000000000000000000000000000000000000000000000100");
-        COutPoint outpoint(prevId, i);
-
-        mtx.vin.resize(mtx.vin.size() + 1);
-        mtx.vin[i].prevout = outpoint;
-        mtx.vin[i].scriptSig = CScript();
-
-        mtx.vout.resize(mtx.vout.size() + 1);
-        mtx.vout[i].nValue = 1000;
-        mtx.vout[i].scriptPubKey = CScript() << OP_1;
-    }
-
-    // sign all inputs
-    for(uint32_t i = 0; i < mtx.vin.size(); i++) {
-        bool hashSigned = SignSignature(keystore, scriptPubKey, mtx, i, 1000, sigHashes.at(i % sigHashes.size()));
-        assert(hashSigned);
-    }
-
-    CTransaction tx;
-    CDataStream ssout(SER_NETWORK, PROTOCOL_VERSION);
-    ssout << mtx;
-    ssout >> tx;
-
-    // check all inputs concurrently, with the cache
-    PrecomputedTransactionData precomTxData(tx);
-    boost::thread_group threadGroup;
-    CCheckQueue<CScriptCheck> scriptcheckqueue(128);
-    CCheckQueueControl<CScriptCheck> control(&scriptcheckqueue);
-
-    for (int i=0; i<20; i++)
-        threadGroup.create_thread(boost::bind(&CCheckQueue<CScriptCheck>::Thread, boost::ref(scriptcheckqueue)));
-
-    std::vector<Coin> coins;
-    for(uint32_t i = 0; i < mtx.vin.size(); i++) {
-        Coin coin;
-        coin.nHeight = 1;
-        coin.out.nValue = 1000;
-        coin.out.scriptPubKey = scriptPubKey;
-        coins.emplace_back(std::move(coin));
-    }
-
-    for(uint32_t i = 0; i < mtx.vin.size(); i++) {
-        std::vector<CScriptCheck> vChecks;
-        const CTxOut& output = coins[tx.vin[i].prevout.n].out;
-        CScriptCheck check(output.scriptPubKey, output.nValue, tx, i, SCRIPT_VERIFY_P2SH, false, &precomTxData);
-        vChecks.push_back(CScriptCheck());
-        check.swap(vChecks.back());
-        control.Add(vChecks);
-    }
-
-    bool controlCheck = control.Wait();
-    assert(controlCheck);
-
-    threadGroup.interrupt_all();
-    threadGroup.join_all();
 }
 
 BOOST_AUTO_TEST_CASE(test_IsStandard)

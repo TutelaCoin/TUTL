@@ -1,6 +1,5 @@
 // Copyright (c) 2012-2017 The Bitcoin Core developers
-// Copyright (c) 2016-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2016-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -46,8 +45,8 @@ const std::string CLIENT_NAME("Tutela Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "de00ed19a7a6bf0a56c196335fe6e79318fc78c3"
-#define GIT_COMMIT_DATE "Fri, 14 Jan 2022 15:04:46 +0100"
+#define GIT_COMMIT_ID "c0279b1af959e527faa192717859b55e4d9c0581"
+#define GIT_COMMIT_DATE "Tue, 9 Jun 2020 20:54:24 +0200"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

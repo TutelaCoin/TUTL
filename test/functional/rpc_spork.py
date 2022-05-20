@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019-2020 The PIVX developers
+# Copyright (c) 2019 The Tutela developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # -*- coding: utf-8 -*-
 
 from time import sleep
 
-from test_framework.test_framework import PivxTestFramework
+from test_framework.test_framework import TutelaTestFramework
 from test_framework.util import set_node_times, assert_equal
 
 
-class PIVX_RPCSporkTest(PivxTestFramework):
+class Tutela_RPCSporkTest(TutelaTestFramework):
 
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
-        self.extra_args = [[]] * self.num_nodes
+        self.extra_args = [['-staking=1']] * self.num_nodes
         self.extra_args[0].append('-sporkkey=932HEevBSujW2ud7RfB1YF91AFygbBRQj3de3LyaCRqNzKKgWXi')
 
     def setup_chain(self):
@@ -70,5 +70,5 @@ class PIVX_RPCSporkTest(PivxTestFramework):
 
 
 if __name__ == '__main__':
-    PIVX_RPCSporkTest().main()
+    Tutela_RPCSporkTest().main()
 

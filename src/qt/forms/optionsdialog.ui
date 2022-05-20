@@ -30,10 +30,10 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start TUTL after logging in to the system.</string>
+          <string>Automatically start Tutela after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start TUTL on system login</string>
+          <string>&amp;Start Tutela on system login</string>
          </property>
         </widget>
        </item>
@@ -325,7 +325,7 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the TUTL client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the Tutela client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -345,7 +345,7 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the TUTL network through a SOCKS5 proxy.</string>
+          <string>Connect to the Tutela network through a SOCKS5 proxy.</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -511,7 +511,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting TUTL.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting Tutela.</string>
            </property>
           </widget>
          </item>
@@ -533,7 +533,7 @@
          </property>
          <property name="text">
           <string>Language missing or translation incomplete? Help contributing translations here:
-https://discord.gg/dj4P8qWgbZ</string>
+https://www.transifex.com/TutelaCoin/TutelaCoin-translations</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

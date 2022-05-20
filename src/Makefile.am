@@ -19,8 +19,7 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-BITCOIN_CONFIG_INCLUDES=-I$(builddir)/config
-BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+BITCOIN_INCLUDES=-I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
@@ -78,10 +77,9 @@ endif
 # tutela core #
 BITCOIN_CORE_H = \
   activemasternode.h \
-  addrdb.h \
   addrman.h \
+  alert.h \
   allocators.h \
-  arith_uint256.h \
   amount.h \
   base58.h \
   bip38.h \
@@ -96,47 +94,37 @@ BITCOIN_CORE_H = \
   clientversion.h \
   coincontrol.h \
   coins.h \
+  collateral.h \
   compat.h \
   compat/byteswap.h \
   compat/endian.h \
   compat/sanity.h \
   compressor.h \
-  consensus/consensus.h \
   consensus/merkle.h \
-  consensus/validation.h \
-  consensus/tx_verify.h \
-  consensus/zerocoin_verify.h \
-  consensus/params.h \
-  consensus/upgrades.h \
   primitives/block.h \
   primitives/transaction.h \
   core_io.h \
-  cuckoocache.h \
   crypter.h \
   pairresult.h \
   addressbook.h \
   denomination_functions.h \
+  obfuscation.h \
+  obfuscation-relay.h \
   wallet/db.h \
-  fs.h \
   hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
-  interface/wallet.h \
   invalid.h \
   invalid_outpoints.json.h \
   invalid_serials.json.h \
-  legacy/stakemodifier.h \
   kernel.h \
+  swifttx.h \
   key.h \
-  key_io.h \
   keystore.h \
-  dbwrapper.h \
+  leveldbwrapper.h \
   limitedmap.h \
-  logging.h \
-  legacy/validation_zerocoin_legacy.h \
   main.h \
-  memusage.h \
   masternode.h \
   masternode-payments.h \
   masternode-budget.h \
@@ -146,16 +134,11 @@ BITCOIN_CORE_H = \
   merkleblock.h \
   messagesigner.h \
   miner.h \
-  net.h \
-  netaddress.h \
+  mruset.h \
   netbase.h \
-  netmessagemaker.h \
+  net.h \
   noui.h \
-  policy/fees.h \
-  policy/policy.h \
-  optional.h \
   pow.h \
-  prevector.h \
   protocol.h \
   pubkey.h \
   random.h \
@@ -166,7 +149,6 @@ BITCOIN_CORE_H = \
   rpc/server.h \
   scheduler.h \
   script/interpreter.h \
-  script/keyorigin.h \
   script/script.h \
   script/sigcache.h \
   script/sign.h \
@@ -177,45 +159,42 @@ BITCOIN_CORE_H = \
   sporkdb.h \
   sporkid.h \
   stakeinput.h \
-  script/ismine.h \
   streams.h \
   support/cleanse.h \
   sync.h \
   threadsafety.h \
-  threadinterrupt.h \
   timedata.h \
   tinyformat.h \
   torcontrol.h \
   txdb.h \
   txmempool.h \
   guiinterface.h \
-  guiinterfaceutil.h \
   uint256.h \
-  uint512.h \
-  blob_uint256.h \
   undo.h \
-  util/memory.h \
   util.h \
-  util/macros.h \
-  util/threadnames.h \
   utilstrencodings.h \
   utilmoneystr.h \
   utiltime.h \
   validationinterface.h \
   version.h \
-  wallet/hdchain.h \
-  wallet/rpcwallet.h \
-  wallet/scriptpubkeyman.h \
   wallet/wallet.h \
+  wallet/wallet_ismine.h \
   wallet/walletdb.h \
   zpivchain.h \
+  zpiv/accumulators.h \
+  zpiv/accumulatorcheckpoints.h \
+  zpiv/accumulatorcheckpoints.json.h \
+  zpiv/accumulatormap.h \
   zpiv/deterministicmint.h \
   zpiv/mintpool.h \
+  zpiv/witness.h \
   zpiv/zerocoin.h \
   zpiv/zpivtracker.h \
   zpiv/zpivwallet.h \
   zpiv/zpivmodule.h \
-  zpiv/zpos.h \
+  genwit.h \
+  concurrentqueue.h \
+  lightzpivthread.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h \
   zmq/zmqnotificationinterface.h \
@@ -231,27 +210,21 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_server_a_SOURCES = \
-  addrdb.cpp \
   addrman.cpp \
+  alert.cpp \
   bloom.cpp \
   blocksignature.cpp \
   chain.cpp \
   checkpoints.cpp \
-  consensus/params.cpp \
-  consensus/tx_verify.cpp \
-  consensus/zerocoin_verify.cpp \
   httprpc.cpp \
   httpserver.cpp \
   init.cpp \
-  dbwrapper.cpp \
-  legacy/validation_zerocoin_legacy.cpp \
+  leveldbwrapper.cpp \
   main.cpp \
   merkleblock.cpp \
   miner.cpp \
   net.cpp \
   noui.cpp \
-  policy/fees.cpp \
-  policy/policy.cpp \
   pow.cpp \
   rest.cpp \
   rpc/blockchain.cpp \
@@ -263,7 +236,6 @@ libbitcoin_server_a_SOURCES = \
   rpc/rawtransaction.cpp \
   rpc/server.cpp \
   script/sigcache.cpp \
-  script/ismine.cpp \
   sporkdb.cpp \
   timedata.cpp \
   torcontrol.cpp \
@@ -289,11 +261,14 @@ libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
+  collateral.cpp \
   denomination_functions.cpp \
-  interface/wallet.cpp \
+  obfuscation.cpp \
+  obfuscation-relay.cpp \
+  wallet/db.cpp \
   addressbook.cpp \
   crypter.cpp \
-  key_io.cpp \
+  swifttx.cpp \
   masternode.cpp \
   masternode-budget.cpp \
   masternode-payments.cpp \
@@ -301,39 +276,34 @@ libbitcoin_wallet_a_SOURCES = \
   masternodeconfig.cpp \
   masternodeman.cpp \
   messagesigner.cpp \
-  legacy/stakemodifier.cpp \
-  kernel.cpp \
-  wallet/db.cpp \
   wallet/rpcdump.cpp \
   wallet/rpcwallet.cpp \
-  wallet/hdchain.cpp \
-  wallet/scriptpubkeyman.cpp \
+  kernel.cpp \
   wallet/wallet.cpp \
-  wallet/wallet_zerocoin.cpp \
+  wallet/wallet_ismine.cpp \
   wallet/walletdb.cpp \
   zpiv/deterministicmint.cpp \
   zpiv/zerocoin.cpp \
+  zpiv/accumulators.cpp \
   zpiv/mintpool.cpp \
+  zpiv/witness.cpp \
   zpiv/zpivwallet.cpp \
   zpiv/zpivtracker.cpp \
   stakeinput.cpp \
+  genwit.cpp \
   zpiv/zpivmodule.cpp \
-  zpiv/zpos.cpp \
+  lightzpivthread.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_SOURCES = \
-  crypto/aes.cpp \
-  crypto/aes.h \
   crypto/sha1.cpp \
   crypto/sha256.cpp \
   crypto/sha512.cpp \
   crypto/chacha20.h \
   crypto/chacha20.cpp \
-  crypto/google_authenticator.cpp \
-  crypto/hmac_sha1.cpp \
   crypto/hmac_sha256.cpp \
   crypto/rfc6979_hmac_sha256.cpp \
   crypto/hmac_sha512.cpp \
@@ -349,8 +319,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/common.h \
   crypto/sha256.h \
   crypto/sha512.h \
-  crypto/google_authenticator.h \
-  crypto/hmac_sha1.h \
   crypto/hmac_sha256.h \
   crypto/rfc6979_hmac_sha256.h \
   crypto/hmac_sha512.h \
@@ -363,30 +331,14 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \
   crypto/sph_skein.h \
-  crypto/sph_types.h \
-  crypto/sph_luffa.h \
-  crypto/sph_haval.h \
-  crypto/luffa.c \
-  crypto/sph_cubehash.h \
-  crypto/cubehash.c \
-  crypto/sph_shavite \
-  crypto/shavite.c \
-  crypto/sph_simd.h \
-  crypto/simd.c \
-  crypto/sph_echo \
-  crypto/echo.c \
-  crypto/shabal.c \
-  crypto/whirlpool.c \
-  crypto/haval.c \
-  crypto/hamsi.c \
-  crypto/fugue.c \
-  crypto/sph_sha2big.c
+  crypto/sph_types.h
 
 # libzerocoin library
 libzerocoin_libbitcoin_zerocoin_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOOST_CPPFLAGS)
 libzerocoin_libbitcoin_zerocoin_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libzerocoin_libbitcoin_zerocoin_a_SOURCES = \
   libzerocoin/Accumulator.h \
+  libzerocoin/AccumulatorProofOfKnowledge.h \
   libzerocoin/bignum.h \
   libzerocoin/Coin.h \
   libzerocoin/CoinRandomnessSchnorrSignature.h \
@@ -395,16 +347,20 @@ libzerocoin_libbitcoin_zerocoin_a_SOURCES = \
   libzerocoin/Denominations.h \
   libzerocoin/ParamGeneration.h \
   libzerocoin/Params.h \
+  libzerocoin/SerialNumberSignatureOfKnowledge.h \
   libzerocoin/SpendType.h \
   libzerocoin/ZerocoinDefines.h \
   libzerocoin/bignum.cpp \
   libzerocoin/Accumulator.cpp \
+  libzerocoin/AccumulatorProofOfKnowledge.cpp \
   libzerocoin/Coin.cpp \
   libzerocoin/CoinRandomnessSchnorrSignature.cpp \
   libzerocoin/CoinSpend.cpp \
+  libzerocoin/Commitment.cpp \
   libzerocoin/Denominations.cpp \
   libzerocoin/ParamGeneration.cpp \
-  libzerocoin/Params.cpp
+  libzerocoin/Params.cpp \
+  libzerocoin/SerialNumberSignatureOfKnowledge.cpp
 if USE_NUM_GMP
   libzerocoin_libbitcoin_zerocoin_a_SOURCES += libzerocoin/bignum_gmp.cpp
 endif
@@ -416,12 +372,14 @@ endif
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_common_a_SOURCES = \
+  zpiv/accumulators.cpp \
+  zpiv/accumulatorcheckpoints.cpp \
+  zpiv/accumulatormap.cpp \
   allocators.cpp \
   amount.cpp \
   base58.cpp \
   bip38.cpp \
   chainparams.cpp \
-  consensus/upgrades.cpp \
   coins.cpp \
   compressor.cpp \
   consensus/merkle.cpp \
@@ -435,7 +393,6 @@ libbitcoin_common_a_SOURCES = \
   invalid.cpp \
   key.cpp \
   keystore.cpp \
-  netaddress.cpp \
   netbase.cpp \
   protocol.cpp \
   pubkey.cpp \
@@ -455,35 +412,25 @@ libbitcoin_common_a_SOURCES = \
 libbitcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_util_a_SOURCES = \
-  arith_uint256.cpp \
   allocators.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
   compat/glibc_sanity.cpp \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \
-  fs.cpp \
-  logging.cpp \
   random.cpp \
   rpc/protocol.cpp \
   support/cleanse.cpp \
   sync.cpp \
-  threadinterrupt.cpp \
   uint256.cpp \
-  blob_uint256.cpp \
   util.cpp \
   utilmoneystr.cpp \
-  util/threadnames.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
   $(BITCOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT
 libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
-AM_LDFLAGS += $(COMPAT_LDFLAGS)
-endif
-
-if GLIBC_BACK_COMPAT
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
@@ -498,13 +445,13 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # tutelad binary #
-tutelad_SOURCES = pivxd.cpp
+tutelad_SOURCES = tutelad.cpp
 tutelad_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 tutelad_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 tutelad_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-tutelad_SOURCES += pivxd-res.rc
+tutelad_SOURCES += tutelad-res.rc
 endif
 tutelad_LDADD = \
   $(LIBBITCOIN_SERVER) \
@@ -523,13 +470,13 @@ tutelad_LDADD = \
 tutelad_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # tutela-cli binary #
-tutela_cli_SOURCES = pivx-cli.cpp
+tutela_cli_SOURCES = tutela-cli.cpp
 tutela_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 tutela_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 tutela_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-tutela_cli_SOURCES += pivx-cli-res.rc
+tutela_cli_SOURCES += tutela-cli-res.rc
 endif
 
 tutela_cli_LDADD = \
@@ -542,13 +489,13 @@ tutela_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # tutela-tx binary #
-tutela_tx_SOURCES = pivx-tx.cpp
+tutela_tx_SOURCES = tutela-tx.cpp
 tutela_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 tutela_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 tutela_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-tutela_tx_SOURCES += pivx-tx-res.rc
+tutela_tx_SOURCES += tutela-tx-res.rc
 endif
 
 tutela_tx_LDADD = \
@@ -566,7 +513,6 @@ tutela_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h
 libbitcoinconsensus_la_SOURCES = \
-  arith_uint256.cpp \
   allocators.cpp \
   primitives/transaction.cpp \
   crypto/hmac_sha512.cpp \
@@ -581,7 +527,6 @@ libbitcoinconsensus_la_SOURCES = \
   script/interpreter.cpp \
   script/bitcoinconsensus.cpp \
   uint256.cpp \
-  blob_uint256.cpp \
   utilstrencodings.cpp
 
 if GLIBC_BACK_COMPAT
@@ -600,7 +545,6 @@ CLEANFILES = $(EXTRA_LIBRARIES)
 
 CLEANFILES += *.gcda *.gcno
 CLEANFILES += compat/*.gcda compat/*.gcno
-CLEANFILES += consensus/*.gcda consensus/*.gcno
 CLEANFILES += crypto/*.gcda crypto/*.gcno
 CLEANFILES += libzerocoin/*.gcda libzerocoin/*.gcno
 CLEANFILES += primitives/*.gcda primitives/*.gcno
@@ -614,21 +558,15 @@ CLEANFILES += zmq/*.gcda zmq/*.gcno
 CLEANFILES += zpiv/*.gcda zpiv/*.gcno
 CLEANFILES += obj/build.h
 
-CTAES_DIST =  crypto/ctaes/bench.c
-CTAES_DIST += crypto/ctaes/ctaes.c
-CTAES_DIST += crypto/ctaes/ctaes.h
-CTAES_DIST += crypto/ctaes/README.md
-CTAES_DIST += crypto/ctaes/test.c
-
-EXTRA_DIST = $(CTAES_DIST)
+EXTRA_DIST =
 
 
-config/pivx-config.h: config/stamp-h1
+config/tutela-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/pivx-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/tutela-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/pivx-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/pivx-config.h.in
+$(top_srcdir)/$(subdir)/config/tutela-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/tutela-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean
@@ -636,7 +574,6 @@ clean-local:
 	-rm -f leveldb/*/*.gcda leveldb/*/*.gcno leveldb/helpers/memenv/*.gcda leveldb/helpers/memenv/*.gcno
 	-rm -f config.h
 	-rm -rf test/__pycache__
-	-rm -rf ../target
 
 .rc.o:
 	@test -f $(WINDRES)
@@ -660,16 +597,11 @@ endif
 	$(AM_V_GEN) $(PROTOC) --cpp_out=$(@D) --proto_path=$(<D) $<
 
 if EMBEDDED_LEVELDB
-include Makefile.crc32c.include
 include Makefile.leveldb.include
 endif
 
 if ENABLE_TESTS
 include Makefile.test.include
-endif
-
-if ENABLE_BENCH
-include Makefile.bench.include
 endif
 
 if ENABLE_QT

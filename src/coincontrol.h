@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2015-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,18 +15,16 @@ class CCoinControl
 {
 public:
     CTxDestination destChange = CNoDestination();
+    bool useObfuScation;
+    bool useSwiftTX;
     bool fSplitBlock;
     int nSplitBlock;
     //! If false, allows unselected inputs, but requires all selected inputs be used
     bool fAllowOtherInputs;
-    //! Includes watch only addresses which are solvable
+    //! Includes watch only addresses which match the ISMINE_WATCH_SOLVABLE criteria
     bool fAllowWatchOnly;
     //! Minimum absolute fee (not per kilobyte)
     CAmount nMinimumTotalFee;
-    //! Override estimated feerate
-    bool fOverrideFeeRate;
-    //! Feerate to use if overrideFeeRate is true
-    CFeeRate nFeeRate;
 
     CCoinControl()
     {
@@ -38,11 +35,11 @@ public:
     {
         destChange = CNoDestination();
         setSelected.clear();
+        useSwiftTX = false;
+        useObfuScation = false;
         fAllowOtherInputs = false;
-        fAllowWatchOnly = false;
+        fAllowWatchOnly = true;
         nMinimumTotalFee = 0;
-        nFeeRate = CFeeRate(0);
-        fOverrideFeeRate = false;
         fSplitBlock = false;
         nSplitBlock = 1;
     }
@@ -52,9 +49,10 @@ public:
         return (!setSelected.empty());
     }
 
-    bool IsSelected(const COutPoint& output) const
+    bool IsSelected(const uint256& hash, unsigned int n) const
     {
-        return (setSelected.count(output) > 0);
+        COutPoint outpt(hash, n);
+        return (setSelected.count(outpt) > 0);
     }
 
     void Select(const COutPoint& output)
@@ -72,12 +70,12 @@ public:
         setSelected.clear();
     }
 
-    void ListSelected(std::vector<COutPoint>& vOutpoints) const
+    void ListSelected(std::vector<COutPoint>& vOutpoints)
     {
         vOutpoints.assign(setSelected.begin(), setSelected.end());
     }
 
-    unsigned int QuantitySelected() const
+    unsigned int QuantitySelected()
     {
         return setSelected.size();
     }

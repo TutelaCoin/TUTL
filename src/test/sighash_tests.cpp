@@ -1,19 +1,16 @@
 // Copyright (c) 2013 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "data/sighash.json.h"
-
-#include "consensus/tx_verify.h"
 #include "main.h"
 #include "serialize.h"
 #include "script/script.h"
 #include "script/interpreter.h"
 #include "util.h"
 #include "version.h"
-#include "test_pivx.h"
+#include "test_tutela.h"
 
 #include <iostream>
 
@@ -29,7 +26,7 @@ uint256 static SignatureHashOld(CScript scriptCode, const CTransaction& txTo, un
     if (nIn >= txTo.vin.size())
     {
         printf("ERROR: SignatureHash() : nIn=%d out of range\n", nIn);
-        return UINT256_ONE;
+        return 1;
     }
     CMutableTransaction txTmp(txTo);
 
@@ -60,7 +57,7 @@ uint256 static SignatureHashOld(CScript scriptCode, const CTransaction& txTo, un
         if (nOut >= txTmp.vout.size())
         {
             printf("ERROR: SignatureHash() : nOut=%d out of range\n", nOut);
-            return UINT256_ONE;
+            return 1;
         }
         txTmp.vout.resize(nOut+1);
         for (unsigned int i = 0; i < nOut; i++)
@@ -141,7 +138,7 @@ BOOST_AUTO_TEST_CASE(sighash_test)
 
         uint256 sh, sho;
         sho = SignatureHashOld(scriptCode, txTo, nIn, nHashType);
-        sh = SignatureHash(scriptCode, txTo, nIn, nHashType, 0, SIGVERSION_BASE);
+        sh = SignatureHash(scriptCode, txTo, nIn, nHashType);
         #if defined(PRINT_SIGHASH_JSON)
         CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
         ss << txTo;
@@ -208,7 +205,7 @@ BOOST_AUTO_TEST_CASE(sighash_from_data)
           continue;
         }
 
-        sh = SignatureHash(scriptCode, tx, nIn, nHashType, 0, SIGVERSION_BASE);
+        sh = SignatureHash(scriptCode, tx, nIn, nHashType);
         BOOST_CHECK_MESSAGE(sh.GetHex() == sigHashHex, strTest);
     }
 }

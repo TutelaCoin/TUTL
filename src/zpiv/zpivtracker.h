@@ -1,32 +1,30 @@
-// Copyright (c) 2018-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2018-2020 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ZPIVTRACKER_H
-#define PIVX_ZPIVTRACKER_H
+#ifndef Tutela_ZTUTLTRACKER_H
+#define Tutela_ZTUTLTRACKER_H
 
 #include "zerocoin.h"
+#include "witness.h"
 #include "sync.h"
 #include <list>
 
 class CDeterministicMint;
-class CzPIVWallet;
-class CWallet;
+class CzTUTLWallet;
 
-class CzPIVTracker
+class CzTUTLTracker
 {
 private:
     bool fInitialized;
-    /* Parent wallet */
-    CWallet* wallet{nullptr};
+    std::string strWalletFile;
     std::map<uint256, CMintMeta> mapSerialHashes;
     std::map<uint256, uint256> mapPendingSpends; //serialhash, txid of spend
     bool UpdateStatusInternal(const std::set<uint256>& setMempool, CMintMeta& mint);
 public:
-    CzPIVTracker(CWallet* parent);
-    ~CzPIVTracker();
-    void Add(const CDeterministicMint& dMint, bool isNew = false, bool isArchived = false, CzPIVWallet* zPIVWallet = NULL);
+    CzTUTLTracker(std::string strWalletFile);
+    ~CzTUTLTracker();
+    void Add(const CDeterministicMint& dMint, bool isNew = false, bool isArchived = false, CzTUTLWallet* zTUTLWallet = NULL);
     void Add(const CZerocoinMint& mint, bool isNew = false, bool isArchived = false);
     bool Archive(CMintMeta& meta);
     bool HasPubcoin(const CBigNum& bnValue) const;
@@ -53,4 +51,4 @@ public:
     void Clear();
 };
 
-#endif //PIVX_ZPIVTRACKER_H
+#endif //Tutela_ZTUTLTRACKER_H

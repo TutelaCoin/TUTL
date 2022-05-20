@@ -1,5 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +6,7 @@
 #define BITCOIN_QT_OPENURIDIALOG_H
 
 #include <QDialog>
-#include "qt/pivx/snackbar.h"
+#include "qt/tutela/snackbar.h"
 
 namespace Ui
 {
@@ -25,10 +24,10 @@ public:
     QString getURI();
     void showEvent(QShowEvent *event) override;
 
-protected Q_SLOTS:
+protected slots:
     void accept() override;
 
-private Q_SLOTS:
+private slots:
     void on_selectFileButton_clicked();
 
 private:

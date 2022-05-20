@@ -1,21 +1,19 @@
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2018 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ZPIVWALLET_H
-#define PIVX_ZPIVWALLET_H
+#ifndef Tutela_ZTUTLWALLET_H
+#define Tutela_ZTUTLWALLET_H
 
 #include <map>
 #include "libzerocoin/Coin.h"
 #include "mintpool.h"
 #include "uint256.h"
-#include "wallet/wallet.h"
 #include "zerocoin.h"
 
 class CDeterministicMint;
 
-class CzPIVWallet
+class CzTUTLWallet
 {
 private:
     uint256 seedMaster;
@@ -24,13 +22,13 @@ private:
     CMintPool mintPool;
 
 public:
-    CzPIVWallet(CWallet* parent);
+    CzTUTLWallet(std::string strWalletFile);
 
     void AddToMintPool(const std::pair<uint256, uint32_t>& pMint, bool fVerbose);
     bool SetMasterSeed(const uint256& seedMaster, bool fResetCount = false);
     uint256 GetMasterSeed() { return seedMaster; }
     void SyncWithChain(bool fGenerateMintPool = true);
-    void GenerateDeterministicZPIV(libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin& coin, CDeterministicMint& dMint, bool fGenerateOnly = false);
+    void GenerateDeterministicZTUTL(libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin& coin, CDeterministicMint& dMint, bool fGenerateOnly = false);
     void GenerateMint(const uint32_t& nCount, const libzerocoin::CoinDenomination denom, libzerocoin::PrivateCoin& coin, CDeterministicMint& dMint);
     void GetState(int& nCount, int& nLastGenerated);
     bool RegenerateMint(const CDeterministicMint& dMint, CZerocoinMint& mint);
@@ -41,14 +39,11 @@ public:
     bool IsInMintPool(const CBigNum& bnValue) { return mintPool.Has(bnValue); }
     void UpdateCount();
     void Lock();
-    void SeedToZPIV(const uint512& seed, CBigNum& bnValue, CBigNum& bnSerial, CBigNum& bnRandomness, CKey& key);
+    void SeedToZTUTL(const uint512& seed, CBigNum& bnValue, CBigNum& bnSerial, CBigNum& bnRandomness, CKey& key);
     bool CheckSeed(const CDeterministicMint& dMint);
 
 private:
-    /* Parent wallet */
-    CWallet* wallet{nullptr};
-
     uint512 GetZerocoinSeed(uint32_t n);
 };
 
-#endif //PIVX_ZPIVWALLET_H
+#endif //Tutela_ZTUTLWALLET_H

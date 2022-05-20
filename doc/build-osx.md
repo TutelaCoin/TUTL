@@ -16,7 +16,7 @@ Then install [Homebrew](https://brew.sh).
 Dependencies
 ----------------------
 
-    brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf python3 qt5 zmq libevent qrencode gmp libsodium rust
+    brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf python3 qt5 zmq libevent qrencode gmp
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
@@ -38,20 +38,20 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-Build PIVX Core
+Build Tutela
 ------------------------
 
-1. Clone the PIVX Core source code:
+1. Clone the Tutela source code:
 
-        git clone https://github.com/pivx-project/pivx
-        cd pivx
+        git clone https://github.com/TutelaCoin/TUTL.git
+        cd tutela
 
 2.  Make the Homebrew OpenSSL headers visible to the configure script  (do ```brew info openssl``` to find out why this is necessary, or if you use Homebrew with installation folders different from the default).
 
         export LDFLAGS+=-L/usr/local/opt/openssl/lib
         export CPPFLAGS+=-I/usr/local/opt/openssl/include
 
-3.  Build PIVX Core:
+3.  Build Tutela:
 
         ./autogen.sh
         ./configure
@@ -69,7 +69,7 @@ Disable-wallet mode
 --------------------
 **Note:** This functionality is not yet completely implemented, and compilation using the below option will currently fail.
 
-When the intention is to run only a P2P node without a wallet, PIVX Core may be compiled in
+When the intention is to run only a P2P node without a wallet, Tutela may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet
@@ -79,28 +79,28 @@ In this case there is no dependency on Berkeley DB 4.8.
 Running
 -------
 
-PIVX Core is now available at `./src/pivxd`
+Tutela is now available at `./src/tutelad`
 
 Before running, you may create an empty configuration file:
 
-    mkdir -p "/Users/${USER}/Library/Application Support/PIVX"
+    mkdir -p "/Users/${USER}/Library/Application Support/tutela"
 
-    touch "/Users/${USER}/Library/Application Support/PIVX/pivx.conf"
+    touch "/Users/${USER}/Library/Application Support/tutela/tutela.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/PIVX/pivx.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/tutela/tutela.conf"
 
-The first time you run pivxd, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
+The first time you run tutelad, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/PIVX/debug.log
+    tail -f $HOME/Library/Application\ Support/tutela/debug.log
 
 Other commands:
 -------
 
-    ./src/pivxd -daemon # Starts the pivx daemon.
-    ./src/pivx-cli --help # Outputs a list of command-line options.
-    ./src/pivx-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/tutelad -daemon # Starts The Tutela daemon.
+    ./src/tutela-cli --help # Outputs a list of command-line options.
+    ./src/tutela-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----

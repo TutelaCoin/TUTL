@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Tutela Core
+Comment=Tutela P2P Cryptocurrency
+Exec=tutela-qt %u
+Terminal=false
+Type=Application
+Icon=tutela128
+MimeType=x-scheme-handler/tutela;
+Categories=Office;Finance;
+StartupWMClass=Tutela-qt
+Name[en_US]=tutela-qt.desktop

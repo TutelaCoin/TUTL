@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -160,6 +159,23 @@ private:
     static LockedPageManager* _instance;
     static boost::once_flag init_flag;
 };
+
+//
+// Functions for directly locking/unlocking memory objects.
+// Intended for non-dynamically allocated structures.
+//
+template <typename T>
+void LockObject(const T& t)
+{
+    LockedPageManager::Instance().LockRange((void*)(&t), sizeof(T));
+}
+
+template <typename T>
+void UnlockObject(const T& t)
+{
+    memory_cleanse((void*)(&t), sizeof(T));
+    LockedPageManager::Instance().UnlockRange((void*)(&t), sizeof(T));
+}
 
 //
 // Allocator that locks its contents from being paged

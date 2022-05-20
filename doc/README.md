@@ -3,7 +3,7 @@ Tutela Core
 
 Setup
 ---------------------
-[Tutela Core](https://tutela.io/) is the original Tutela client and it builds the backbone of the network. However, it downloads and stores the entire history of Tutela transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Tutela Core](http://tutela.io/wallet) is the original Tutela client and it builds the backbone of the network. However, it downloads and stores the entire history of Tutela transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -18,7 +18,7 @@ Unpack the files into a directory and run:
 
 ### Windows
 
-Unpack the files into a directory, and then run Tutela-qt.exe.
+Unpack the files into a directory, and then run tutela-qt.exe.
 
 ### macOS
 
@@ -26,9 +26,10 @@ Drag Tutela-Qt to your applications folder, and then run Tutela-Qt.
 
 ### Need Help?
 
-* See the documentation at the [Tutela Wiki](https://github.com/tutelacrypto/)
+* See the documentation at the [Tutela Wiki](https://github.com/TutelaCoin/TUTL/wiki)
 for help and more information.
-* Join our Discord server [Discord Server](https://discord.gg/dj4P8qWgbZ)
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [Tutela Forum](http://forum.tutela.io/).
+* Join our Discord server [Discord Server](https://discord.tutela.io)
 
 Building
 ---------------------
@@ -48,15 +49,15 @@ The Tutela repo's [root README](/README.md) contains relevant information on the
 - [Multiwallet Qt Development](multiwallet-qt.md)
 - [Release Notes](release-notes.md)
 - [Release Process](release-process.md)
-- [Source Code Documentation (External Link)](https://github.com/tutelacrypto/)
+- [Source Code Documentation (External Link)](https://www.fuzzbawls.pw/tutela/doxygen/)
 - [Translation Process](translation_process.md)
 - [Unit Tests](unit-tests.md)
 - [Unauthenticated REST Interface](REST-interface.md)
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [Tutela Homepage](https://tutela.io/).
-* Join the [Tutela Discord](https://discord.gg/dj4P8qWgbZ).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [Tutela](http://forum.tutela.io/) forum.
+* Join the [Tutela Discord](https://discord.tutela.io).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

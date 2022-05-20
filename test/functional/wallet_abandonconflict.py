@@ -4,17 +4,11 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
-from test_framework.test_framework import PivxTestFramework
-from test_framework.util import (
-    assert_equal,
-    connect_nodes,
-    Decimal,
-    disconnect_nodes,
-    sync_blocks,
-    sync_mempools
-)
+from test_framework.test_framework import TutelaTestFramework
+from test_framework.util import *
+import urllib.parse
 
-class AbandonConflictTest(PivxTestFramework):
+class AbandonConflictTest(TutelaTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
@@ -37,8 +31,8 @@ class AbandonConflictTest(PivxTestFramework):
         assert(balance - newbalance < Decimal("0.001")) #no more than fees lost
         balance = newbalance
 
-        # Disconnect nodes so node0's transactions don't get into node1's mempool
-        disconnect_nodes(self.nodes[0], 1)
+        url = urllib.parse.urlparse(self.nodes[1].url)
+        self.nodes[0].disconnectnode(url.hostname+":"+str(p2p_port(1)))
 
         # Identify the 10btc outputs
         nA = next(i for i, vout in enumerate(self.nodes[0].getrawtransaction(txA, 1)["vout"]) if vout["value"] == 10)

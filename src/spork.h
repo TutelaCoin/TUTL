@@ -1,6 +1,5 @@
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2016-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,12 +10,12 @@
 #include "hash.h"
 #include "key.h"
 #include "main.h"
-#include "messagesigner.h"
 #include "net.h"
 #include "sporkid.h"
 #include "sync.h"
 #include "util.h"
 
+#include "obfuscation.h"
 #include "protocol.h"
 
 
@@ -53,7 +52,7 @@ public:
         nTimeSigned(nTimeSigned)
     { }
 
-    uint256 GetHash() const { return XEVAN(BEGIN(nSporkID), END(nTimeSigned)); }
+    uint256 GetHash() const { return HashQuark(BEGIN(nSporkID), END(nTimeSigned)); }
 
     // override CSignedMessage functions
     uint256 GetSignatureHash() const override;
@@ -69,7 +68,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action)
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
         READWRITE(nSporkID);
         READWRITE(nValue);
@@ -88,7 +87,7 @@ public:
 class CSporkManager
 {
 private:
-    mutable RecursiveMutex cs;
+    mutable CCriticalSection cs;
     std::string strMasterPrivKey;
     std::map<SporkId, CSporkDef*> sporkDefsById;
     std::map<std::string, CSporkDef*> sporkDefsByName;
@@ -100,7 +99,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action)
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
         READWRITE(mapSporksActive);
         // we don't serialize private key to prevent its leakage

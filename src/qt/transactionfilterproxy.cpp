@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2020 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,8 +11,6 @@
 #include <cstdlib>
 
 #include <QDateTime>
-
-#define SKIP_ROWCOUNT_N_TIMES 10
 
 // Earliest date that can be represented (far in the past)
 const QDateTime TransactionFilterProxy::MIN_DATE = QDateTime::fromTime_t(0);
@@ -49,7 +46,7 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
         return false;
     if (fHideOrphans && isOrphan(status, type))
         return false;
-    if (!(bool)(TYPE(type) & typeFilter))
+    if (!(TYPE(type) & typeFilter))
         return false;
     if (involvesWatchAddress && watchOnlyFilter == WatchOnlyFilter_No)
         return false;
@@ -66,7 +63,10 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
     if (fOnlyZc && !isZcTx(type)){
         return false;
     }
-    if (fOnlyStakesandMN && !isStakeTx(type) && !isMasternodeRewardTx(type))
+    if (fOnlyStakes && !isStakeTx(type))
+        return false;
+
+    if (fOnlyColdStaking && !isColdStake(type))
         return false;
 
     return true;
@@ -128,32 +128,31 @@ void TransactionFilterProxy::setShowZcTxes(bool fOnlyZc)
     invalidateFilter();
 }
 
-void TransactionFilterProxy::setOnlyStakesandMN(bool fOnlyStakesandMN)
+void TransactionFilterProxy::setOnlyStakes(bool fOnlyStakes)
 {
-    this->fOnlyStakesandMN = fOnlyStakesandMN;
+    this->fOnlyStakes = fOnlyStakes;
+    invalidateFilter();
+}
+
+void TransactionFilterProxy::setOnlyColdStakes(bool fOnlyColdStakes)
+{
+    this->fOnlyColdStaking = fOnlyColdStakes;
     invalidateFilter();
 }
 
 int TransactionFilterProxy::rowCount(const QModelIndex& parent) const
 {
-    static int entryCount = 0;
-
-    int rowCount = 
-        entryCount++ < SKIP_ROWCOUNT_N_TIMES ?
-        sourceModel()->rowCount() :
-        QSortFilterProxyModel::rowCount(parent);
-
     if (limitRows != -1) {
-        return std::min(rowCount, limitRows);
+        return std::min(QSortFilterProxyModel::rowCount(parent), limitRows);
     } else {
-        return rowCount;
+        return QSortFilterProxyModel::rowCount(parent);
     }
 }
 
 bool TransactionFilterProxy::isOrphan(const int status, const int type)
 {
     return ( (type == TransactionRecord::Generated || type == TransactionRecord::StakeMint ||
-            type == TransactionRecord::StakeZPIV || type == TransactionRecord::MNReward)
+            type == TransactionRecord::StakeZTUTL || type == TransactionRecord::MNReward)
             && (status == TransactionStatus::Conflicted || status == TransactionStatus::NotAccepted) );
 }
 
@@ -163,9 +162,15 @@ bool TransactionFilterProxy::isZcTx(int type) const {
 }
 
 bool TransactionFilterProxy::isStakeTx(int type) const {
-    return type == TransactionRecord::StakeMint || type == TransactionRecord::Generated;
+    return (type == TransactionRecord::StakeMint || type == TransactionRecord::Generated || type == TransactionRecord::StakeZTUTL);
 }
 
-bool TransactionFilterProxy::isMasternodeRewardTx(int type) const {
-    return (type == TransactionRecord::MNReward);
+bool TransactionFilterProxy::isColdStake(int type) const {
+    return (type == TransactionRecord::P2CSDelegation || type == TransactionRecord::P2CSDelegationSent || type == TransactionRecord::P2CSDelegationSentOwner || type == TransactionRecord::StakeDelegated || type == TransactionRecord::StakeHot);
 }
+
+/*QVariant TransactionFilterProxy::dataFromSourcePos(int sourceRow, int role) const {
+    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+    return index.data(index, role);
+}
+ */

@@ -1,0 +1,8 @@
+/usr/bin/tutela-cli		--	gen_context(system_u:object_r:tutela_exec_t,s0)
+/usr/sbin/tutelad		--	gen_context(system_u:object_r:tutela_exec_t,s0)
+/usr/lib(64)?/tutela/tutelad		--	gen_context(system_u:object_r:tutela_exec_t,s0)
+
+/etc/tutela(/.*)?		gen_context(system_u:object_r:tutela_conf_t,s0)
+/var/lib/tutela(/.*)?		gen_context(system_u:object_r:tutela_var_lib_t,s0)
+
+(/var)?/run/tutelad(/.*)?   gen_context(system_u:object_r:tutela_var_run_t,s0)

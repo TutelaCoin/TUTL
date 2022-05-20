@@ -1,5 +1,4 @@
 // Copyright (c) 2014-2017 The Bitcoin Core developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +6,7 @@
 #define BITCOIN_COMPAT_BYTESWAP_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/pivx-config.h>
+#include <config/tutela-config.h>
 #endif
 
 #include <stdint.h>

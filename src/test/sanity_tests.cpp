@@ -1,11 +1,10 @@
 // Copyright (c) 2012-2013 The Bitcoin Core developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "compat/sanity.h"
 #include "key.h"
-#include "test_pivx.h"
+#include "test_tutela.h"
 
 #include <boost/test/unit_test.hpp>
 

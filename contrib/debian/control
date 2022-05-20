@@ -28,22 +28,22 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: https://tutela.io/
-Vcs-Git: git://https://github.com/tutelacrypto.git
-Vcs-Browser: https://github.com/tutelacrypto
+Homepage: http://www.tutela.io
+Vcs-Git: git://github.com/TutelaCoin/TUTL.git
+Vcs-Browser: https://github.com/TutelaCoin/TUTL
 
 Package: tutelad
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- Tutela is a free, open source peer-to-peer electronic cash system that
+ Tutela is a free open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 18.5+ GB of space, slowly growing.
+ requires 10+ GB of space, slowly growing.
  .
  This package provides the daemon, tutelad, and the CLI tool
  tutela-cli to interact with the daemon.
@@ -52,13 +52,13 @@ Package: tutela-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- Tutela is a free, open source peer-to-peer electronic cash system that
+ Tutela is a free open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 18.5+ GB of space, slowly growing.
+ requires 10+ GB of space, slowly growing.
  .
  This package provides Tutela-Qt, a GUI for Tutela based on Qt.

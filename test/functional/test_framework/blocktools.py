@@ -18,6 +18,7 @@ def create_block(hashprev, coinbase, nTime=None):
         block.nTime = nTime
     block.hashPrevBlock = hashprev
     block.nBits = 0x1e0ffff0 # Will break after a difficulty adjustment...
+    block.nAccumulatorCheckpoint = 0
     block.vtx.append(coinbase)
     block.hashMerkleRoot = block.calc_merkle_root()
     block.calc_sha256()
@@ -93,7 +94,7 @@ def get_legacy_sigopcount_tx(tx, fAccurate=True):
         count += CScript(j.scriptSig).GetSigOpCount(fAccurate)
     return count
 
-### PIVX specific blocktools ###
+### Tutela specific blocktools ###
 def create_coinbase_pos(height):
     coinbase = CTransaction()
     coinbase.vin = [CTxIn(NullOutPoint, cbase_scriptsig(height), 0xffffffff)]

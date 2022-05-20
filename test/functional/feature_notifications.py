@@ -5,14 +5,10 @@
 """Test the -alertnotify, -blocknotify and -walletnotify options."""
 import os
 
-from test_framework.test_framework import PivxTestFramework
-from test_framework.util import (
-    assert_equal,
-    wait_until,
-    connect_nodes,
-)
+from test_framework.test_framework import TutelaTestFramework
+from test_framework.util import assert_equal, wait_until, connect_nodes_bi
 
-class NotificationsTest(PivxTestFramework):
+class NotificationsTest(TutelaTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
@@ -56,7 +52,7 @@ class NotificationsTest(PivxTestFramework):
         self.log.info("test -walletnotify after rescan")
         # restart node to rescan to force wallet notifications
         self.restart_node(1)
-        connect_nodes(self.nodes[0], 1)
+        connect_nodes_bi(self.nodes, 0, 1)
 
         wait_until(lambda: os.path.isfile(self.tx_filename) and os.stat(self.tx_filename).st_size >= (block_count * 65), timeout=10)
 

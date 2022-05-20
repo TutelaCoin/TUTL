@@ -5,10 +5,10 @@
 """Verify that starting tutela with -h works as expected."""
 import subprocess
 
-from test_framework.test_framework import PivxTestFramework
+from test_framework.test_framework import TutelaTestFramework
 from test_framework.util import assert_equal
 
-class HelpTest(PivxTestFramework):
+class HelpTest(TutelaTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -18,7 +18,7 @@ class HelpTest(PivxTestFramework):
         # Don't start the node
 
     def run_test(self):
-        self.log.info("Start tutela with -? for help text")
+        self.log.info("Start tutela with -h for help text")
         self.nodes[0].start(extra_args=['-?'], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         # Node should exit immediately and output help to stdout.
         ret_code = self.nodes[0].process.wait(timeout=1)

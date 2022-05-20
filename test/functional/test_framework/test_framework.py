@@ -45,7 +45,7 @@ from .util import (
     assert_equal,
     assert_greater_than,
     check_json_precision,
-    connect_nodes,
+    connect_nodes_bi,
     connect_nodes_clique,
     disconnect_nodes,
     DEFAULT_FEE,
@@ -70,10 +70,10 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-TMPDIR_PREFIX = "pivx_func_test_"
+TMPDIR_PREFIX = "tutela_func_test_"
 
 
-class PivxTestFramework():
+class TutelaTestFramework():
     """Base class for a tutela test script.
 
     Individual tutela test scripts should subclass this class and override the set_test_params() and run_test() methods.
@@ -122,8 +122,6 @@ class PivxTestFramework():
                           help="Write tested RPC commands into this directory")
         parser.add_option("--configfile", dest="configfile",
                           help="Location of the test framework config file")
-        parser.add_option('--legacywallet', dest="legacywallet", default=False, action="store_true",
-                          help='create pre-HD wallets only')
         parser.add_option("--pdbonfailure", dest="pdbonfailure", default=False, action="store_true",
                           help="Attach a python debugger if test fails")
         parser.add_option("--usecli", dest="usecli", default=False, action="store_true",
@@ -227,18 +225,8 @@ class PivxTestFramework():
         # Connect the nodes as a "chain".  This allows us
         # to split the network between nodes 1 and 2 to get
         # two halves that can work on competing chains.
-        #
-        # Topology looks like this:
-        # node0 <-- node1 <-- node2 <-- node3
-        #
-        # If all nodes are in IBD (clean chain from genesis), node0 is assumed to be the source of blocks (miner). To
-        # ensure block propagation, all nodes will establish outgoing connections toward node0.
-        # See fPreferredDownload in net_processing.
-        #
-        # If further outbound connections are needed, they can be added at the beginning of the test with e.g.
-        # connect_nodes(self.nodes[1], 2)
         for i in range(self.num_nodes - 1):
-            connect_nodes(self.nodes[i + 1], i)
+            connect_nodes_bi(self.nodes, i, i + 1)
         self.sync_all()
 
     def setup_nodes(self):
@@ -260,11 +248,6 @@ class PivxTestFramework():
 
         if extra_args is None:
             extra_args = [[]] * num_nodes
-        # Check wallet version
-        if self.options.legacywallet:
-            for arg in extra_args:
-                arg.append('-legacywallet')
-            self.log.info("Running test with legacy (pre-HD) wallet")
         if binary is None:
             binary = [None] * num_nodes
         assert_equal(len(extra_args), num_nodes)
@@ -364,7 +347,7 @@ class PivxTestFramework():
         """
         Join the (previously split) network halves together.
         """
-        connect_nodes(self.nodes[1], 2)
+        connect_nodes_bi(self.nodes, 1, 2)
         self.sync_all()
 
     def sync_all(self, node_groups=None):
@@ -679,7 +662,7 @@ class PivxTestFramework():
             initialize_datadir(self.options.tmpdir, i)
 
 
-    ### tutela Specific TestFramework ###
+    ### Tutela Specific TestFramework ###
     ###################################
     def init_dummy_key(self):
         self.DUMMY_KEY = CECKey()
@@ -742,6 +725,9 @@ class PivxTestFramework():
                 assert_equal(zcBalance['Immature'], 0)
                 if peer == 2:
                     assert_equal(len(zclist), len(zclist_spendable))
+                else:
+                    # last mints added on accumulators - not spendable
+                    assert_equal(0, len(zclist_spendable))
                 assert_equal(set([x['denomination'] for x in zclist]), set(vZC_DENOMS))
                 assert_equal([x['confirmations'] for x in zclist], [30-peer] * len(vZC_DENOMS))
 
@@ -757,9 +743,9 @@ class PivxTestFramework():
                  nHeight:                   (int) height of the previous block. used only if zpos=True for
                                             stake checksum. Optional, if not provided rpc_conn's height is used.
         :return: prevouts:         ({bytes --> (int, bytes, int)} dictionary)
-                                   maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zTUTL-)
+                                   maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zpiv-)
                                    to (amount, prevScript, timeBlockFrom).
-                                   For zTUTL prevScript is replaced with serialHash hex string.
+                                   For zpiv prevScript is replaced with serialHash hex string.
         """
         assert_greater_than(len(self.nodes), node_id)
         rpc_conn = self.nodes[node_id]
@@ -780,8 +766,17 @@ class PivxTestFramework():
                 prevouts[outPoint.serialize_uniqueness()] = (outValue, prevScript, prevTime)
 
             else:
+                # get mint checkpoint
+                if nHeight == -1:
+                    nHeight = rpc_conn.getblockcount()
+                checkpointBlock = rpc_conn.getblock(rpc_conn.getblockhash(nHeight), True)
+                checkpoint = int(checkpointBlock['acc_checkpoint'], 16)
+                # parse checksum and get checksumblock time
+                pos = vZC_DENOMS.index(utxo['denomination'])
+                checksum = (checkpoint >> (32 * (len(vZC_DENOMS) - 1 - pos))) & 0xFFFFFFFF
+                prevTime = rpc_conn.getchecksumblock(hex(checksum), utxo['denomination'], True)['time']
                 uniqueness = bytes.fromhex(utxo['hash stake'])[::-1]
-                prevouts[uniqueness] = (int(utxo["denomination"]) * COIN, utxo["serial hash"], 0)
+                prevouts[uniqueness] = (int(utxo["denomination"]) * COIN, utxo["serial hash"], prevTime)
 
         return prevouts
 
@@ -790,9 +785,9 @@ class PivxTestFramework():
         """ makes a list of CTransactions each spending an input from spending PrevOuts to an output to_pubKey
         :param   node_id:            (int) index of the CTestNode used as rpc connection. Must own spendingPrevOuts.
                  spendingPrevouts:   ({bytes --> (int, bytes, int)} dictionary)
-                                     maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zTUTL-)
+                                     maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zpiv-)
                                      to (amount, prevScript, timeBlockFrom).
-                                     For zTUTL prevScript is replaced with serialHash hex string.
+                                     For zpiv prevScript is replaced with serialHash hex string.
                  to_pubKey           (bytes) recipient public key
         :return: block_txes:         ([CTransaction] list)
         """
@@ -823,7 +818,6 @@ class PivxTestFramework():
     def stake_block(self, node_id,
             nHeight,
             prevHhash,
-            prevModifier,
             stakeableUtxos,
             startTime=None,
             privKeyWIF=None,
@@ -833,11 +827,10 @@ class PivxTestFramework():
         :param   node_id:           (int) index of the CTestNode used as rpc connection. Must own stakeableUtxos.
                  nHeight:           (int) height of the block being produced
                  prevHash:          (string) hex string of the previous block hash
-                 prevModifier       (string) hex string of the previous block stake modifier
                  stakeableUtxos:    ({bytes --> (int, bytes, int)} dictionary)
-                                    maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zTUTL-)
+                                    maps CStake "uniqueness" (i.e. serialized COutPoint -or hash stake, for zpiv-)
                                     to (amount, prevScript, timeBlockFrom).
-                                    For zTUTL prevScript is replaced with serialHash hex string.
+                                    For zpiv prevScript is replaced with serialHash hex string.
                  startTime:         (int) epoch time to be used as blocktime (iterated in solve_stake)
                  privKeyWIF:        (string) private key to be used for staking/signing
                                     If empty string, it will be used the pk from the stake input
@@ -859,14 +852,19 @@ class PivxTestFramework():
         block = create_block(int(prevHhash, 16), coinbaseTx, nTime)
 
         # Find valid kernel hash - iterates stakeableUtxos, then block.nTime
-        block.solve_stake(stakeableUtxos, int(prevModifier, 16))
+        block.solve_stake(stakeableUtxos)
 
-        # Check if this is a zPoS block or regular stake - sign stake tx
+        # Check if this is a zPoS block or regular/cold stake - sign stake tx
         block_sig_key = CECKey()
+        prevout = None
         isZPoS = is_zerocoin(block.prevoutStake)
         if isZPoS:
-            # !TODO: remove me
-            raise Exception("zPOS tests discontinued")
+            _, serialHash, _ = stakeableUtxos[block.prevoutStake]
+            raw_stake = rpc_conn.createrawzerocoinstake(serialHash)
+            stake_tx_signed_raw_hex = raw_stake["hex"]
+            stake_pkey = raw_stake["private-key"]
+            block_sig_key.set_compressed(True)
+            block_sig_key.set_secretbytes(bytes.fromhex(stake_pkey))
 
         else:
             coinstakeTx_unsigned = CTransaction()
@@ -889,7 +887,7 @@ class PivxTestFramework():
                     # Use pk of the input. Ask sk from rpc_conn
                     rawtx = rpc_conn.getrawtransaction('{:064x}'.format(prevout.hash), True)
                     privKeyWIF = rpc_conn.dumpprivkey(rawtx["vout"][prevout.n]["scriptPubKey"]["addresses"][0])
-                # Use the provided privKeyWIF 
+                # Use the provided privKeyWIF (cold staking).
                 # export the corresponding private key to sign block
                 privKey, compressed = wif_to_privkey(privKeyWIF)
                 block_sig_key.set_compressed(compressed)
@@ -933,16 +931,7 @@ class PivxTestFramework():
         assert_greater_than(len(self.nodes), node_id)
         nHeight = self.nodes[node_id].getblockcount()
         prevHhash = self.nodes[node_id].getblockhash(nHeight)
-        prevModifier = self.nodes[node_id].getblock(prevHhash)['stakeModifier']
-        return self.stake_block(node_id,
-                                nHeight+1,
-                                prevHhash,
-                                prevModifier,
-                                stakeableUtxos,
-                                btime,
-                                privKeyWIF,
-                                vtx,
-                                fDoubleSpend)
+        return self.stake_block(node_id, nHeight+1, prevHhash, stakeableUtxos, btime, privKeyWIF, vtx, fDoubleSpend)
 
 
     def check_tx_in_chain(self, node_id, txid):
@@ -1024,26 +1013,20 @@ class PivxTestFramework():
         """ stakes a block using generate on nodes[node_id]"""
         assert_greater_than(len(self.nodes), node_id)
         rpc_conn = self.nodes[node_id]
-        ss = rpc_conn.getstakingstatus()
-        assert ss["walletunlocked"]
-        assert ss["stakeablecoins"] > 0
-        assert ss["stakingbalance"] > 0.0
         if btime is not None:
             next_btime = btime + 60
         fStaked = False
-        failures = 0
         while not fStaked:
             try:
                 rpc_conn.generate(1)
                 fStaked = True
             except JSONRPCException as e:
                 if ("Couldn't create new block" in str(e)):
-                    failures += 1
-                    # couldn't generate block. check that this node can still stake (after 60 failures)
-                    if failures > 60:
-                        ss = rpc_conn.getstakingstatus()
-                        if not (ss["walletunlocked"] and ss["stakeablecoins"] > 0 and ss["stakingbalance"] > 0.0):
-                            raise AssertionError("Node %d unable to stake!" % node_id)
+                    # couldn't generate block. check that this node can stake
+                    ss = rpc_conn.getstakingstatus()
+                    if not (ss["validtime"] and ss["haveconnections"] and ss["walletunlocked"] and
+                            ss["mintablecoins"] and ss["enoughcoins"]):
+                        raise AssertionError("Node %d unable to stake!" % node_id)
                     # try to stake one sec in the future
                     if btime is not None:
                         btime += 1
@@ -1097,7 +1080,7 @@ class PivxTestFramework():
 
 ### ------------------------------------------------------
 
-class ComparisonTestFramework(PivxTestFramework):
+class ComparisonTestFramework(TutelaTestFramework):
     """Test framework for doing p2p comparison testing
 
     Sets up some tutelad binaries:

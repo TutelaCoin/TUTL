@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2020 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +7,7 @@
 #define BITCOIN_QT_COINCONTROLDIALOG_H
 
 #include "amount.h"
-#include "qt/pivx/snackbar.h"
+#include "qt/tutela/snackbar.h"
 
 #include <QAbstractButton>
 #include <QAction>
@@ -45,20 +44,21 @@ class CoinControlDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CoinControlDialog(QWidget* parent = nullptr);
+    explicit CoinControlDialog(QWidget* parent = nullptr, bool fMultisigEnabled = false);
     ~CoinControlDialog();
 
     void setModel(WalletModel* model);
     void updateDialogLabels();
-    void updateLabels();
     void updateView();
     void refreshDialog();
-    void clearPayAmounts();
-    void addPayAmount(const CAmount& amount);
 
+    // static because also called from sendcoinsdialog
+    static void updateLabels(WalletModel*, QDialog*);
     static QString getPriorityLabel(double dPriority, double mempoolEstimatePriority);
 
-    CCoinControl* coinControl;
+    static QList<CAmount> payAmounts;
+    static CCoinControl* coinControl;
+    static int nSplitBlockDummy;
 
 private:
     Ui::CoinControlDialog* ui;
@@ -66,8 +66,7 @@ private:
     WalletModel* model;
     int sortColumn;
     Qt::SortOrder sortOrder;
-    QList<CAmount> payAmounts{};
-    unsigned int nSelectableInputs{0};
+    bool fMultisigEnabled;
 
     QMenu* contextMenu;
     QTreeWidgetItem* contextMenuItem;
@@ -75,7 +74,6 @@ private:
     QAction* lockAction;
     QAction* unlockAction;
 
-    void updatePushButtonSelectAll(bool checked);
     void sortView(int, Qt::SortOrder);
     void inform(const QString& text);
 
@@ -91,7 +89,7 @@ private:
     };
     friend class CCoinControlWidgetItem;
 
-private Q_SLOTS:
+private slots:
     void showMenu(const QPoint&);
     void copyAmount();
     void copyLabel();

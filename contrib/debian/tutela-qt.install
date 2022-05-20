@@ -1,0 +1,6 @@
+usr/local/bin/tutela-qt usr/bin
+share/pixmaps/tutela32.xpm usr/share/pixmaps
+share/pixmaps/tutela16.xpm usr/share/pixmaps
+share/pixmaps/tutela128.png usr/share/pixmaps
+debian/tutela-qt.desktop usr/share/applications
+debian/tutela-qt.protocol usr/share/kde4/services/

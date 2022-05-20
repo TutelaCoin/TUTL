@@ -1,12 +1,12 @@
 WINDOWS BUILD NOTES
 ====================
 
-Below are some notes on how to build Pivx Core for Windows.
+Below are some notes on how to build Tutela for Windows.
 
-The options known to work for building Pivx Core on Windows are:
+The options known to work for building Tutela on Windows are:
 
 * On Linux, using the [Mingw-w64](https://mingw-w64.org/doku.php) cross compiler tool chain. Ubuntu Bionic 18.04 is required
-and is the platform used to build the Pivx Core Windows release binaries.
+and is the platform used to build the Tutela Windows release binaries.
 * On Windows, using [Windows
 Subsystem for Linux (WSL)](https://msdn.microsoft.com/commandline/wsl/about) and the Mingw-w64 cross compiler tool chain.
 
@@ -73,8 +73,8 @@ If you want to build the windows installer with `make deploy` you need [NSIS](ht
 
 Acquire the source in the usual way:
 
-    git clone https://github.com/pivx-project/pivx.git
-    cd pivx
+    git clone https://github.com/TutelaCoin/TUTL.git
+    cd tutela
 
 ## Building for 64-bit Windows
 
@@ -88,8 +88,8 @@ Ubuntu Bionic 18.04 <sup>[1](#footnote1)</sup>:
 
 Once the toolchain is installed the build steps are common:
 
-Note that for WSL the Pivx Core source path MUST be somewhere in the default mount file system, for
-example /usr/src/pivx, AND not under /mnt/d/. If this is not the case the dependency autoconf scripts will fail.
+Note that for WSL the Tutela source path MUST be somewhere in the default mount file system, for
+example /usr/src/tutela, AND not under /mnt/d/. If this is not the case the dependency autoconf scripts will fail.
 This means you cannot use a directory that is located directly on the host Windows file system to perform the build.
 
 Build using:
@@ -102,6 +102,26 @@ Build using:
     CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/
     make
 
+## Building for 32-bit Windows
+
+To build executables for Windows 32-bit, install the following dependencies:
+
+    sudo apt install g++-mingw-w64-i686 mingw-w64-i686-dev
+
+Ubuntu Bionic 18.04 <sup>[1](#footnote1)</sup>:
+
+    sudo update-alternatives --config i686-w64-mingw32-g++  # Set the default mingw32 g++ compiler option to posix.
+
+Build using:
+
+    PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
+    cd depends
+    make HOST=i686-w64-mingw32
+    cd ..
+    ./autogen.sh # not required when building from tarball
+    CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/
+    make
+
 ## Depends system
 
 For further documentation on the depends system see [README.md](../depends/README.md) in the depends directory.
@@ -112,9 +132,9 @@ Installation
 After building using the Windows subsystem it can be useful to copy the compiled
 executables to a directory on the Windows drive in the same directory structure
 as they appear in the release `.zip` archive. This can be done in the following
-way. This will install to `c:\workspace\pivx`, for example:
+way. This will install to `c:\workspace\tutela`, for example:
 
-    make install DESTDIR=/mnt/c/workspace/pivx
+    make install DESTDIR=/mnt/c/workspace/tutela
 
 You can also create an installer using:
 
@@ -127,5 +147,5 @@ Footnotes
 compiler options to allow a choice between either posix or win32 threads. The default option is win32 threads which is the more
 efficient since it will result in binary code that links directly with the Windows kernel32.lib. Unfortunately, the headers
 required to support win32 threads conflict with some of the classes in the C++11 standard library, in particular std::mutex.
-It's not possible to build the Pivx Core code using the win32 version of the Mingw-w64 cross compilers (at least not without
-modifying headers in the Pivx Core source code).
+It's not possible to build the Tutela code using the win32 version of the Mingw-w64 cross compilers (at least not without
+modifying headers in the Tutela source code).

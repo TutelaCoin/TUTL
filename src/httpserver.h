@@ -1,5 +1,4 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -32,10 +31,6 @@ bool StartHTTPServer();
 void InterruptHTTPServer();
 /** Stop HTTP server */
 void StopHTTPServer();
-
-/** Change logging level for libevent. Removes BCLog::LIBEVENT from log categories if
- * libevent doesn't support debug logging.*/
-bool UpdateHTTPServerLogging(bool enable);
 
 /** Handler for requests to a certain HTTP path */
 typedef std::function<void(HTTPRequest* req, const std::string &)> HTTPRequestHandler;

@@ -38,9 +38,9 @@ OSX_PLIST=$(top_builddir)/share/qt/Info.plist #not installed
 OSX_QT_TRANSLATIONS = da,de,es,hu,ru,uk,zh_CN,zh_TW
 
 DIST_DOCS = $(wildcard doc/*.md) $(wildcard doc/release-notes/*.md)
-DIST_CONTRIB = $(top_srcdir)/contrib/pivx-cli.bash-completion \
-	       $(top_srcdir)/contrib/pivx-tx.bash-completion \
-	       $(top_srcdir)/contrib/pivxd.bash-completion \
+DIST_CONTRIB = $(top_srcdir)/contrib/tutela-cli.bash-completion \
+	       $(top_srcdir)/contrib/tutela-tx.bash-completion \
+	       $(top_srcdir)/contrib/tutelad.bash-completion \
            $(top_srcdir)/contrib/init \
            $(top_srcdir)/contrib/install_db4.sh
 
@@ -51,14 +51,14 @@ DIST_SHARE = \
 BIN_CHECKS=$(top_srcdir)/contrib/devtools/symbol-check.py \
            $(top_srcdir)/contrib/devtools/security-check.py
 
-WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/pivx.ico \
+WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/tutela.ico \
   $(top_srcdir)/share/pixmaps/nsis-header.bmp \
   $(top_srcdir)/share/pixmaps/nsis-wizard.bmp \
   $(top_srcdir)/doc/README_windows.txt
 
-LINUX_PACKAGING = $(top_srcdir)/share/pixmaps/pivx16.xpm \
-  $(top_srcdir)/share/pixmaps/pivx32.xpm \
-  $(top_srcdir)/share/pixmaps/pivx128.png
+LINUX_PACKAGING = $(top_srcdir)/share/pixmaps/tutela16.xpm \
+  $(top_srcdir)/share/pixmaps/tutela32.xpm \
+  $(top_srcdir)/share/pixmaps/tutela128.png
 
 OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_FANCY_PLIST) $(OSX_INSTALLER_ICONS) \
   $(top_srcdir)/contrib/macdeploy/$(OSX_BACKGROUND_SVG) \
@@ -67,9 +67,9 @@ OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_FANCY_PLIST) $(OSX_INSTALLER_ICONS) \
   $(top_srcdir)/contrib/macdeploy/detached-sig-create.sh
 
 COVERAGE_INFO = baseline.info \
-  test_pivx_filtered.info total_coverage.info \
+  test_tutela_filtered.info total_coverage.info \
   baseline_filtered.info functional_test.info functional_test_filtered.info \
-  test_pivx_coverage.info test_pivx.info
+  test_tutela_coverage.info test_tutela.info
 
 dist-hook:
 	-$(GIT) archive --format=tar HEAD -- src/clientversion.cpp | $(AMTAR) -C $(top_distdir) -xf -
@@ -173,7 +173,7 @@ $(BITCOIN_CLI_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
 if USE_LCOV
-LCOV_FILTER_PATTERN=-p "/usr/include/" -p "/usr/lib/" -p "src/leveldb/" -p "src/crc32c/" -p "src/univalue" -p "src/secp256k1"
+LCOV_FILTER_PATTERN=-p "/usr/include/" -p "/usr/lib/" -p "src/leveldb/" -p "src/univalue" -p "src/secp256k1"
 
 baseline.info:
 	$(LCOV) -c -i -d $(abs_builddir)/src -o $@
@@ -182,16 +182,16 @@ baseline_filtered.info: baseline.info
 	$(abs_builddir)/contrib/filter-lcov.py $(LCOV_FILTER_PATTERN) $< $@
 	$(LCOV) -a $@ $(LCOV_OPTS) -o $@
 
-test_pivx.info: baseline_filtered.info
+test_tutela.info: baseline_filtered.info
 	$(MAKE) -C src/ check
-	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src -t test_pivx -o $@
+	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src -t test_tutela -o $@
 	$(LCOV) -z $(LCOV_OPTS) -d $(abs_builddir)/src
 
-test_pivx_filtered.info: test_pivx.info
+test_tutela_filtered.info: test_tutela.info
 	$(abs_builddir)/contrib/filter-lcov.py $(LCOV_FILTER_PATTERN) $< $@
 	$(LCOV) -a $@ $(LCOV_OPTS) -o $@
 
-functional_test.info: test_pivx_filtered.info
+functional_test.info: test_tutela_filtered.info
 	-@TIMEOUT=15 test/functional/test_runner.py $(EXTENDED_FUNCTIONAL_TESTS)
 	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src --t functional-tests -o $@
 	$(LCOV) -z $(LCOV_OPTS) -d $(abs_builddir)/src
@@ -200,13 +200,13 @@ functional_test_filtered.info: functional_test.info
 	$(abs_builddir)/contrib/filter-lcov.py $(LCOV_FILTER_PATTERN) $< $@
 	$(LCOV) -a $@ $(LCOV_OPTS) -o $@
 
-test_pivx_coverage.info: baseline_filtered.info test_pivx_filtered.info
-	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_pivx_filtered.info -o $@
+test_tutela_coverage.info: baseline_filtered.info test_tutela_filtered.info
+	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_tutela_filtered.info -o $@
 
-total_coverage.info: test_pivx_filtered.info functional_test_filtered.info
-	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_pivx_filtered.info -a functional_test_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
+total_coverage.info: test_tutela_filtered.info functional_test_filtered.info
+	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_tutela_filtered.info -a functional_test_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
 
-test_pivx.coverage/.dirstamp:  test_pivx_coverage.info
+test_tutela.coverage/.dirstamp:  test_tutela_coverage.info
 	$(GENHTML) -s $(LCOV_OPTS) $< -o $(@D)
 	@touch $@
 
@@ -214,7 +214,7 @@ total.coverage/.dirstamp: total_coverage.info
 	$(GENHTML) -s $(LCOV_OPTS) $< -o $(@D)
 	@touch $@
 
-cov: test_pivx.coverage/.dirstamp total.coverage/.dirstamp
+cov: test_tutela.coverage/.dirstamp total.coverage/.dirstamp
 
 endif
 
@@ -245,7 +245,6 @@ EXTRA_DIST += \
     test/util/data/txcreatescript1.json \
     test/util/data/txcreatesign.hex \
     test/util/data/txcreatesign.json \
-    test/util/data/pre_hd_wallet.dat \
     test/util/rpcauth-test.py
 
 CLEANFILES = $(OSX_DMG) $(BITCOIN_WIN_INSTALLER)
@@ -270,6 +269,6 @@ clean-docs:
 	rm -rf doc/doxygen
 
 clean-local: clean-docs
-	rm -rf coverage_percent.txt test_pivx.coverage/ total.coverage/ test/tmp/ cache/ $(OSX_APP)
+	rm -rf coverage_percent.txt test_tutela.coverage/ total.coverage/ test/tmp/ cache/ $(OSX_APP)
 	rm -rf test/functional/__pycache__ test/functional/test_framework/__pycache__ test/cache share/rpcauth/__pycache__
 

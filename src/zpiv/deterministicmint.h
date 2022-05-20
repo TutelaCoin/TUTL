@@ -1,10 +1,9 @@
-// Copyright (c) 2018 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2018 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_DETERMINISTICMINT_H
-#define PIVX_DETERMINISTICMINT_H
+#ifndef Tutela_DETERMINISTICMINT_H
+#define Tutela_DETERMINISTICMINT_H
 
 #include <libzerocoin/Denominations.h>
 #include <uint256.h>
@@ -50,9 +49,9 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action)
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
-        READWRITE(nVersion);
+        READWRITE(this->nVersion);
         READWRITE(nCount);
         READWRITE(hashSeed);
         READWRITE(hashSerial);
@@ -65,4 +64,4 @@ public:
     };
 };
 
-#endif //PIVX_DETERMINISTICMINT_H
+#endif //Tutela_DETERMINISTICMINT_H

@@ -1,10 +1,9 @@
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_ZEROCOIN_H
-#define PIVX_ZEROCOIN_H
+#ifndef Tutela_ZEROCOIN_H
+#define Tutela_ZEROCOIN_H
 
 #include <amount.h>
 #include <limits.h>
@@ -78,7 +77,7 @@ public:
         value = 0;
         denomination = libzerocoin::ZQ_ERROR;
         nHeight = 0;
-        txid.SetNull();
+        txid = 0;
         version = 1;
         privkey.clear();
     }
@@ -156,7 +155,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action) {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(isUsed);
         READWRITE(randomness);
         READWRITE(serialNumber);
@@ -210,7 +209,7 @@ public:
     void SetNull()
     {
         coinSerial = 0;
-        hashTx.SetNull();
+        hashTx = 0;
         pubCoin = 0;
         denomination = libzerocoin::ZQ_ERROR;
     }
@@ -228,7 +227,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action) {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(coinSerial);
         READWRITE(hashTx);
         READWRITE(pubCoin);
@@ -264,4 +263,4 @@ int GetWrapppedSerialInflation(libzerocoin::CoinDenomination denom);
 
 int64_t GetWrapppedSerialInflationAmount();
 
-#endif //PIVX_ZEROCOIN_H
+#endif //Tutela_ZEROCOIN_H

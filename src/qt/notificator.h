@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +7,7 @@
 #define BITCOIN_QT_NOTIFICATOR_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/pivx-config.h"
+#include "config/tutela-config.h"
 #endif
 
 #include <QIcon>
@@ -41,7 +40,7 @@ public:
         Critical     /**< An error occurred */
     };
 
-public Q_SLOTS:
+public slots:
     /** Show notification message.
        @param[in] cls    general message class
        @param[in] title  title shown with message

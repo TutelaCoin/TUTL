@@ -1,5 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -61,7 +60,11 @@ PublicCoinSpend::PublicCoinSpend(libzerocoin::ZerocoinParams* params, Stream& st
 
 }
 
-bool PublicCoinSpend::Verify() const {
+bool PublicCoinSpend::Verify(const libzerocoin::Accumulator& a, bool verifyParams) const {
+    return validate();
+}
+
+bool PublicCoinSpend::validate() const {
     bool fUseV1Params = getCoinVersion() < libzerocoin::PrivateCoin::PUBKEY_VERSION;
     if (version < PUBSPEND_SCHNORR) {
         // spend contains the randomness of the coin
@@ -73,7 +76,7 @@ bool PublicCoinSpend::Verify() const {
         }
 
         // Check that the coin is a commitment to serial and randomness.
-        libzerocoin::ZerocoinParams* params = Params().GetConsensus().Zerocoin_Params(false);
+        libzerocoin::ZerocoinParams* params = Params().Zerocoin_Params(false);
         libzerocoin::Commitment comm(&params->coinCommitmentGroup, getCoinSerialNumber(), randomness);
         if (comm.getCommitmentValue() != pubCoin.getValue()) {
             return error("%s: commitments values are not equal", __func__);
@@ -87,7 +90,7 @@ bool PublicCoinSpend::Verify() const {
         }
 
         // spend contains a shnorr signature of ptxHash with the randomness of the coin
-        libzerocoin::ZerocoinParams* params = Params().GetConsensus().Zerocoin_Params(fUseV1Params);
+        libzerocoin::ZerocoinParams* params = Params().Zerocoin_Params(fUseV1Params);
         if (!schnorrSig.Verify(params, getCoinSerialNumber(), pubCoin.getValue(), getTxOutHash())) {
             return error("%s: schnorr signature does not verify", __func__);
         }
@@ -125,17 +128,7 @@ const uint256 PublicCoinSpend::signatureHash() const
     return h.GetHash();
 }
 
-namespace ZPIVModule {
-
-    // Return stream of CoinSpend from tx input scriptsig
-    CDataStream ScriptSigToSerializedSpend(const CScript& scriptSig)
-    {
-        std::vector<char, zero_after_free_allocator<char> > data;
-        // skip opcode and data-len
-        uint8_t byteskip = ((uint8_t) scriptSig[1] + 2);
-        data.insert(data.end(), scriptSig.begin() + byteskip, scriptSig.end());
-        return CDataStream(data, SER_NETWORK, PROTOCOL_VERSION);
-    }
+namespace ZTUTLModule {
 
     bool createInput(CTxIn &in, CZerocoinMint &mint, uint256 hashTxOut, const int spendVersion) {
         // check that this spend is allowed
@@ -148,7 +141,7 @@ namespace ZPIVModule {
         }
 
         // create the PublicCoinSpend
-        libzerocoin::ZerocoinParams *params = Params().GetConsensus().Zerocoin_Params(fUseV1Params);
+        libzerocoin::ZerocoinParams *params = Params().Zerocoin_Params(fUseV1Params);
         PublicCoinSpend spend(params, spendVersion, mint.GetSerialNumber(), mint.GetRandomness(), hashTxOut, nullptr);
 
         spend.outputIndex = mint.GetOutputIndex();
@@ -182,10 +175,15 @@ namespace ZPIVModule {
         return true;
     }
 
-    PublicCoinSpend parseCoinSpend(const CTxIn &in)
-    {
-        libzerocoin::ZerocoinParams *params = Params().GetConsensus().Zerocoin_Params(false);
-        CDataStream serializedCoinSpend = ScriptSigToSerializedSpend(in.scriptSig);
+    PublicCoinSpend parseCoinSpend(const CTxIn &in) {
+        libzerocoin::ZerocoinParams *params = Params().Zerocoin_Params(false);
+        // skip opcode and data-len
+        uint8_t byteskip(in.scriptSig[1]);
+        byteskip += 2;
+        std::vector<char, zero_after_free_allocator<char> > data;
+        data.insert(data.end(), in.scriptSig.begin() + byteskip, in.scriptSig.end());
+        CDataStream serializedCoinSpend(data, SER_NETWORK, PROTOCOL_VERSION);
+
         return PublicCoinSpend(params, serializedCoinSpend);
     }
 
@@ -219,7 +217,7 @@ namespace ZPIVModule {
                 libzerocoin::IntToZerocoinDenomination(in.nSequence)) != prevOut.nValue) {
             return error("PublicCoinSpend validateInput :: input nSequence different to prevout value");
         }
-        return publicSpend.Verify();
+        return publicSpend.validate();
     }
 
     bool ParseZerocoinPublicSpend(const CTxIn &txIn, const CTransaction& tx, CValidationState& state, PublicCoinSpend& publicSpend)
@@ -229,9 +227,9 @@ namespace ZPIVModule {
             return state.DoS(100, error("%s: public zerocoin spend prev output not found, prevTx %s, index %d",
                                         __func__, txIn.prevout.hash.GetHex(), txIn.prevout.n));
         }
-        if (!ZPIVModule::parseCoinSpend(txIn, tx, prevOut, publicSpend)) {
+        if (!ZTUTLModule::parseCoinSpend(txIn, tx, prevOut, publicSpend)) {
             return state.Invalid(error("%s: invalid public coin spend parse %s\n", __func__,
-                                       tx.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zTUTL");
+                                       tx.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zpiv");
         }
         return true;
     }

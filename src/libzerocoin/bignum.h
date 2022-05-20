@@ -1,7 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +8,7 @@
 #define BITCOIN_BIGNUM_H
 
 #if defined HAVE_CONFIG_H
-#include "config/pivx-config.h"
+#include "config/tutela-config.h"
 #endif
 
 #if defined(USE_NUM_OPENSSL)
@@ -99,17 +98,22 @@ public:
     std::string GetHex() const;
     std::string GetDec() const;
 
-    template<typename Stream>
-    void Serialize(Stream& s) const
+    unsigned int GetSerializeSize(int nType=0, int nVersion=PROTOCOL_VERSION) const
     {
-        ::Serialize(s, getvch());
+        return ::GetSerializeSize(getvch(), nType, nVersion);
     }
 
     template<typename Stream>
-    void Unserialize(Stream& s)
+    void Serialize(Stream& s, int nType=0, int nVersion=PROTOCOL_VERSION) const
+    {
+        ::Serialize(s, getvch(), nType, nVersion);
+    }
+
+    template<typename Stream>
+    void Unserialize(Stream& s, int nType=0, int nVersion=PROTOCOL_VERSION)
     {
         std::vector<unsigned char> vch;
-        ::Unserialize(s, vch);
+        ::Unserialize(s, vch, nType, nVersion);
         setvch(vch);
     }
 

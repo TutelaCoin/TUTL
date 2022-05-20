@@ -1,7 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,12 +11,15 @@
 
 class CScheduler;
 class CWallet;
-class CzPIVWallet;
+class CzTUTLWallet;
 
 namespace boost
 {
 class thread_group;
 } // namespace boost
+
+extern CWallet* pwalletMain;
+extern CzTUTLWallet* zwalletMain;
 
 void StartShutdown();
 bool ShutdownRequested();
@@ -25,10 +27,6 @@ bool ShutdownRequested();
 void Interrupt();
 void Shutdown();
 void PrepareShutdown();
-//!Initialize the logging infrastructure
-void InitLogging();
-//!Parameter interaction: change current parameters depending on various rules
-void InitParameterInteraction();
 bool AppInit2();
 
 /** Initialize Tutela core: Basic context setup.

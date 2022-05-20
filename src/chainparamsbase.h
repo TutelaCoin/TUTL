@@ -1,21 +1,17 @@
 // Copyright (c) 2014 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_CHAINPARAMSBASE_H
 #define BITCOIN_CHAINPARAMSBASE_H
 
-#define __RPCPORT_MAINNET__ 17179
-#define __RPCPORT_TESTNET__ 27179
-
 #include <string>
 #include <vector>
 
 /**
  * CBaseChainParams defines the base parameters (shared between tutela-cli and tutelad)
- * of a given instance of the tutela system.
+ * of a given instance of the Tutela system.
  */
 class CBaseChainParams
 {
@@ -24,6 +20,7 @@ public:
         MAIN,
         TESTNET,
         REGTEST,
+        UNITTEST,
 
         MAX_NETWORK_TYPES
     };
@@ -44,11 +41,6 @@ protected:
  * outside of the unit tests.
  */
 const CBaseChainParams& BaseParams();
-
-/**
- * Return parameters for the given network.
- */
-CBaseChainParams& BaseParams(CBaseChainParams::Network network);
 
 /** Sets the params returned by Params() to those for the given network. */
 void SelectBaseParams(CBaseChainParams::Network network);

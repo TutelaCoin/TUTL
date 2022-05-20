@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,7 +63,10 @@ public:
     void setShowZcTxes(bool fOnlyZc);
 
     /** Only stakes txes **/
-    void setOnlyStakesandMN(bool fOnlyStakesandMN);
+    void setOnlyStakes(bool fOnlyStakes);
+
+    /** Shows only p2cs-p2cs && xxx-p2cs **/
+    void setOnlyColdStakes(bool fOnlyColdStakes);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const;
     static bool isOrphan(const int status, const int type);
@@ -85,11 +87,12 @@ private:
     bool showInactive;
     bool fHideOrphans = true;
     bool fOnlyZc = false;
-    bool fOnlyStakesandMN = false;
+    bool fOnlyStakes = false;
+    bool fOnlyColdStaking = false;
 
     bool isZcTx(int type) const;
     bool isStakeTx(int type) const;
-	bool isMasternodeRewardTx(int type) const;
+    bool isColdStake(int type) const;
 };
 
 #endif // BITCOIN_QT_TRANSACTIONFILTERPROXY_H

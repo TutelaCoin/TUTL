@@ -1,6 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -38,7 +37,7 @@ public:
 protected:
     bool eventFilter(QObject* object, QEvent* event);
 
-private Q_SLOTS:
+private slots:
     /* enable OK button */
     void enableOkButton();
     /* disable OK button */
@@ -55,7 +54,7 @@ private Q_SLOTS:
     void clearStatusLabel();
     void doProxyIpChecks(QValidatedLineEdit* pUiProxyIp, QLineEdit* pUiProxyPort);
 
-Q_SIGNALS:
+signals:
     void proxyIpChecks(QValidatedLineEdit* pUiProxyIp, QLineEdit* pUiProxyPort);
 
 private:

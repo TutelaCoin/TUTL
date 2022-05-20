@@ -33,7 +33,6 @@ MY_RELAY = 1 # from version 70001 onwards, fRelay should be appended to version 
 
 MAX_INV_SZ = 50000
 MAX_BLOCK_BASE_SIZE = 1000000
-CURRENT_BLK_VERSION = 7
 
 COIN = 100000000 # 1 btc in satoshis
 
@@ -216,8 +215,8 @@ class CInv():
         1: "MSG_TX",
         2: "MSG_BLOCK",
         3: "MSG_FILTERED_BLOCK",
-        # 4: "MSG_TXLOCK_REQUEST",
-        # 5: "MSG_TXLOCK_VOTE",
+        4: "MSG_TXLOCK_REQUEST",
+        5: "MSG_TXLOCK_VOTE",
         6: "MSG_SPORK",
         7: "MSG_MASTERNODE_WINNER",
         8: "MSG_MASTERNODE_SCANNING_ERROR",
@@ -460,17 +459,19 @@ class CBlockHeader():
             self.nTime = header.nTime
             self.nBits = header.nBits
             self.nNonce = header.nNonce
+            self.nAccumulatorCheckpoint = header.nAccumulatorCheckpoint
             self.sha256 = header.sha256
             self.hash = header.hash
             self.calc_sha256()
 
     def set_null(self):
-        self.nVersion = CURRENT_BLK_VERSION
+        self.nVersion = 4
         self.hashPrevBlock = 0
         self.hashMerkleRoot = 0
         self.nTime = 0
         self.nBits = 0
         self.nNonce = 0
+        self.nAccumulatorCheckpoint = 0
         self.sha256 = None
         self.hash = None
 
@@ -481,6 +482,7 @@ class CBlockHeader():
         self.nTime = struct.unpack("<I", f.read(4))[0]
         self.nBits = struct.unpack("<I", f.read(4))[0]
         self.nNonce = struct.unpack("<I", f.read(4))[0]
+        self.nAccumulatorCheckpoint = deser_uint256(f)
         self.sha256 = None
         self.hash = None
 
@@ -492,6 +494,7 @@ class CBlockHeader():
         r += struct.pack("<I", self.nTime)
         r += struct.pack("<I", self.nBits)
         r += struct.pack("<I", self.nNonce)
+        r += ser_uint256(self.nAccumulatorCheckpoint)
         return r
 
     def calc_sha256(self):
@@ -503,6 +506,7 @@ class CBlockHeader():
             r += struct.pack("<I", self.nTime)
             r += struct.pack("<I", self.nBits)
             r += struct.pack("<I", self.nNonce)
+            r += ser_uint256(self.nAccumulatorCheckpoint)
             self.sha256 = uint256_from_str(hash256(r))
             self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
 
@@ -511,8 +515,8 @@ class CBlockHeader():
         self.calc_sha256()
         return self.sha256
 
-    # tutela
-    def solve_stake(self, stakeInputs, prevModifier):
+    # Tutela
+    def solve_stake(self, stakeInputs):
         target0 = uint256_from_compact(self.nBits)
         loop = True
         while loop:
@@ -521,9 +525,9 @@ class CBlockHeader():
                 target = int(target0 * nvalue / 100) % 2**256
                 data = b""
                 # always modifier V2 (256 bits) on regtest
-                data += ser_uint256(prevModifier)
+                data += ser_uint256(0)
                 data += struct.pack("<I", prevTime)
-                # prevout is CStake uniqueness
+                # prevout is CStake uniquenessfor zPoS is provided as stakeMap key (instead of it being an COutPoint)
                 data += uniqueness
                 data += struct.pack("<I", self.nTime)
                 posHash = uint256_from_str(hash256(data))
@@ -619,6 +623,7 @@ class CBlock(CBlockHeader):
         data += struct.pack("<I", self.nTime)
         data += struct.pack("<I", self.nBits)
         data += struct.pack("<I", self.nNonce)
+        data += ser_uint256(self.nAccumulatorCheckpoint)
         sha256NoSig = hash256(data)
         self.vchBlockSig = key.sign(sha256NoSig, low_s=low_s)
         self.sig_key = key

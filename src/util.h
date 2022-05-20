@@ -1,67 +1,122 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2015-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Server/client environment: argument handling, config file parsing,
- * thread wrappers
+ * logging, thread wrappers
  */
 #ifndef BITCOIN_UTIL_H
 #define BITCOIN_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/pivx-config.h"
+#include "config/tutela-config.h"
 #endif
 
-#include "fs.h"
-#include "logging.h"
 #include "compat.h"
 #include "tinyformat.h"
 #include "utiltime.h"
-#include "util/threadnames.h"
 
-#include <atomic>
 #include <exception>
 #include <map>
 #include <stdint.h>
 #include <string>
 #include <vector>
 
+#include <boost/filesystem/path.hpp>
 #include <boost/thread/exceptions.hpp>
 #include <boost/thread/condition_variable.hpp> // for boost::thread_interrupted
 
-extern const char * const PIVX_CONF_FILENAME;
-extern const char * const PIVX_PID_FILENAME;
-extern const char * const PIVX_MASTERNODE_CONF_FILENAME;
-extern const char * const DEFAULT_DEBUGLOGFILE;
-
-//TUTL only features
+//Tutela only features
 
 extern bool fMasterNode;
 extern bool fLiteMode;
+extern bool fEnableSwiftTX;
+extern int nSwiftTXDepth;
+extern int nZeromintPercentage;
+extern const int64_t AUTOMINT_DELAY;
+extern int nPreferredDenom;
+extern bool fEnableZeromint;
+extern bool fEnableAutoConvert;
 extern int64_t enforceMasternodePaymentsTime;
 extern std::string strMasterNodeAddr;
 extern int keysLoaded;
 extern bool fSucessfullyLoaded;
+extern std::vector<int64_t> obfuScationDenominations;
 extern std::string strBudgetMode;
 
 extern std::map<std::string, std::string> mapArgs;
 extern std::map<std::string, std::vector<std::string> > mapMultiArgs;
-
+extern bool fDebug;
+extern bool fPrintToConsole;
+extern bool fPrintToDebugLog;
 extern std::string strMiscWarning;
-
+extern bool fLogTimestamps;
+extern bool fLogIPs;
+extern volatile bool fReopenDebugLog;
 
 void SetupEnvironment();
 bool SetupNetworking();
 
-template<typename... Args>
-bool error(const char* fmt, const Args&... args)
+/** Return true if log accepts specified category */
+bool LogAcceptCategory(const char* category);
+/** Send a string to the log output */
+int LogPrintStr(const std::string& str);
+
+#define LogPrintf(...) LogPrint(NULL, __VA_ARGS__)
+
+/** Get format string from VA_ARGS for error reporting */
+template<typename... Args> std::string FormatStringFromLogArgs(const char *fmt, const Args&... args) { return fmt; }
+
+/**
+ * When we switch to C++11, this can be switched to variadic templates instead
+ * of this macro-based construction (see tinyformat.h).
+ */
+#define MAKE_ERROR_AND_LOG_FUNC(n)                                                              \
+    /**   Print to debug.log if -debug=category switch is given OR category is NULL. */         \
+    template <TINYFORMAT_ARGTYPES(n)>                                                           \
+    static inline int LogPrint(const char* category, const char* format, TINYFORMAT_VARARGS(n)) \
+    {                                                                                           \
+        if (!LogAcceptCategory(category)) return 0;                                             \
+        std::string _log_msg_; /* Unlikely name to avoid shadowing variables */                 \
+        try {                                                                                   \
+            _log_msg_ = tfm::format(format, TINYFORMAT_PASSARGS(n));                            \
+        } catch (std::runtime_error &e) {                                                       \
+            _log_msg_ = "Error \"" + std::string(e.what()) + "\" while formatting log message: " + FormatStringFromLogArgs(format, TINYFORMAT_PASSARGS(n));\
+        }                                                                                       \
+        return LogPrintStr(_log_msg_);                                                          \
+    }                                                                                           \
+    /**   Log error and return false */                                                         \
+    template <TINYFORMAT_ARGTYPES(n)>                                                           \
+    static inline bool error(const char* format, TINYFORMAT_VARARGS(n))                         \
+    {                                                                                           \
+        std::string _log_msg_; /* Unlikely name to avoid shadowing variables */                 \
+        try {                                                                                   \
+            _log_msg_ = tfm::format(format, TINYFORMAT_PASSARGS(n));                            \
+        } catch (std::runtime_error &e) {                                                       \
+            _log_msg_ = "Error \"" + std::string(e.what()) + "\" while formatting log message: " + FormatStringFromLogArgs(format, TINYFORMAT_PASSARGS(n));\
+        }                                                                                       \
+        LogPrintStr(std::string("ERROR: ") + _log_msg_ + "\n");                                 \
+        return false;                                                                           \
+    }
+
+TINYFORMAT_FOREACH_ARGNUM(MAKE_ERROR_AND_LOG_FUNC)
+
+/**
+ * Zero-arg versions of logging and error, these are not covered by
+ * TINYFORMAT_FOREACH_ARGNUM
+ */
+static inline int LogPrint(const char* category, const char* format)
 {
-    LogPrintf("ERROR: %s\n", tfm::format(fmt, args...));
+    if (!LogAcceptCategory(category)) return 0;
+    return LogPrintStr(format);
+}
+static inline bool error(const char* format)
+{
+    LogPrintStr(std::string("ERROR: ") + format + "\n");
     return false;
 }
 
@@ -73,24 +128,23 @@ void FileCommit(FILE* fileout);
 bool TruncateFile(FILE* file, unsigned int length);
 int RaiseFileDescriptorLimit(int nMinFD);
 void AllocateFileRange(FILE* file, unsigned int offset, unsigned int length);
-bool RenameOver(fs::path src, fs::path dest);
-bool TryCreateDirectory(const fs::path& p);
-fs::path GetDefaultDataDir();
-const fs::path &GetDataDir(bool fNetSpecific = true);
-const fs::path &ZC_GetParamsDir();
+bool RenameOver(boost::filesystem::path src, boost::filesystem::path dest);
+bool TryCreateDirectory(const boost::filesystem::path& p);
+boost::filesystem::path GetDefaultDataDir();
+const boost::filesystem::path &GetDataDir(bool fNetSpecific = true);
 void ClearDatadirCache();
-fs::path GetConfigFile();
-fs::path GetMasternodeConfigFile();
+boost::filesystem::path GetConfigFile();
+boost::filesystem::path GetMasternodeConfigFile();
 #ifndef WIN32
-fs::path GetPidFile();
-void CreatePidFile(const fs::path& path, pid_t pid);
+boost::filesystem::path GetPidFile();
+void CreatePidFile(const boost::filesystem::path& path, pid_t pid);
 #endif
 void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet, std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet);
 #ifdef WIN32
-fs::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
+boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
 #endif
-fs::path GetTempPath();
-
+boost::filesystem::path GetTempPath();
+void ShrinkDebugFile();
 void runCommand(std::string strCommand);
 
 inline bool IsSwitchChar(char c)
@@ -164,13 +218,8 @@ std::string HelpMessageGroup(const std::string& message);
  */
 std::string HelpMessageOpt(const std::string& option, const std::string& message);
 
-/**
- * Return the number of cores available on the current system.
- * @note This does count virtual cores, such as those provided by HyperThreading.
- */
-int GetNumCores();
-
 void SetThreadPriority(int nPriority);
+void RenameThread(const char* name);
 
 /**
  * .. and a wrapper that just calls func once
@@ -179,7 +228,7 @@ template <typename Callable>
 void TraceThread(const char* name, Callable func)
 {
     std::string s = strprintf("tutela-%s", name);
-    util::ThreadRename(s.c_str());
+    RenameThread(s.c_str());
     try {
         LogPrintf("%s thread start\n", name);
         func();
@@ -195,7 +244,5 @@ void TraceThread(const char* name, Callable func)
         throw;
     }
 }
-
-fs::path AbsPathForConfigVal(const fs::path& path, bool net_specific = true);
 
 #endif // BITCOIN_UTIL_H

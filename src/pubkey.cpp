@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2018 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -251,7 +250,7 @@ bool CPubKey::Derive(CPubKey& pubkeyChild, ChainCode &ccChild, unsigned int nChi
 return true;
 }
 
-void CExtPubKey::Encode(unsigned char code[BIP32_EXTKEY_SIZE]) const
+void CExtPubKey::Encode(unsigned char code[74]) const
 {
     code[0] = nDepth;
     memcpy(code+1, vchFingerprint, 4);
@@ -262,7 +261,7 @@ void CExtPubKey::Encode(unsigned char code[BIP32_EXTKEY_SIZE]) const
     memcpy(code+41, pubkey.begin(), CPubKey::COMPRESSED_PUBLIC_KEY_SIZE);
 }
 
-void CExtPubKey::Decode(const unsigned char code[BIP32_EXTKEY_SIZE])
+void CExtPubKey::Decode(const unsigned char code[74])
 {
     nDepth = code[0];
     memcpy(vchFingerprint, code+1, 4);

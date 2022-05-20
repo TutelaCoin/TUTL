@@ -1,5 +1,4 @@
-// Copyright (c) 2017-2020 The PIVX developers
-// Copyright (c) 2021-2022 The Tutela Core Developers
+// Copyright (c) 2017-2019 The Tutela developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,49 +8,52 @@
 #include "amount.h"
 #include "chainparams.h"
 #include "coincontrol.h"
-#include "consensus/zerocoin_verify.h"
 #include "main.h"
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h"
 #include "txdb.h"
 #include "zpiv/zpivmodule.h"
-#include "wallet/test/wallet_test_fixture.h"
+#include "test/test_tutela.h"
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 
 
 
-BOOST_FIXTURE_TEST_SUITE(zerocoin_transactions_tests, WalletTestingSetup)
+BOOST_FIXTURE_TEST_SUITE(zerocoin_transactions_tests, TestingSetup)
+
+static CWallet cWallet("unlocked.dat");
 
 BOOST_AUTO_TEST_CASE(zerocoin_spend_test)
 {
     SelectParams(CBaseChainParams::MAIN);
-    libzerocoin::ZerocoinParams *ZCParams = Params().GetConsensus().Zerocoin_Params(false);
+    libzerocoin::ZerocoinParams *ZCParams = Params().Zerocoin_Params(false);
     (void)ZCParams;
 
     bool fFirstRun;
-    pwalletMain->LoadWallet(fFirstRun);
-    pwalletMain->zpivTracker = std::unique_ptr<CzPIVTracker>(new CzPIVTracker(pwalletMain));
+    cWallet.LoadWallet(fFirstRun);
+    cWallet.zpivTracker = std::unique_ptr<CzTUTLTracker>(new CzTUTLTracker(cWallet.strWalletFile));
     CMutableTransaction tx;
-    CWalletTx* wtx = new CWalletTx(pwalletMain, tx);
+    CWalletTx* wtx = new CWalletTx(&cWallet, tx);
+    bool fMintChange=true;
+    bool fMinimizeChange=true;
     std::vector<CZerocoinSpend> vSpends;
     std::vector<CZerocoinMint> vMints;
     CAmount nAmount = COIN;
 
     CZerocoinSpendReceipt receipt;
-    std::list<std::pair<CTxDestination, CAmount>> outputs;
-    pwalletMain->SpendZerocoin(nAmount, *wtx, receipt, vMints, outputs);
+    std::list<std::pair<CBitcoinAddress*, CAmount>> outputs;
+    cWallet.SpendZerocoin(nAmount, *wtx, receipt, vMints, fMintChange, fMinimizeChange, outputs);
 
-    BOOST_CHECK_MESSAGE(receipt.GetStatus() == ZPIV_TRX_FUNDS_PROBLEMS, strprintf("Failed Invalid Amount Check: %s", receipt.GetStatusMessage()));
+    BOOST_CHECK_MESSAGE(receipt.GetStatus() == ZTUTL_TRX_FUNDS_PROBLEMS, strprintf("Failed Invalid Amount Check: %s", receipt.GetStatusMessage()));
 
     nAmount = 1;
     CZerocoinSpendReceipt receipt2;
-    pwalletMain->SpendZerocoin(nAmount, *wtx, receipt2, vMints, outputs);
+    cWallet.SpendZerocoin(nAmount, *wtx, receipt2, vMints, fMintChange, fMinimizeChange, outputs);
 
     // if using "wallet.dat", instead of "unlocked.dat" need this
     /// BOOST_CHECK_MESSAGE(vString == "Error: Wallet locked, unable to create transaction!"," Locked Wallet Check Failed");
 
-    BOOST_CHECK_MESSAGE(receipt2.GetStatus() == ZPIV_TRX_FUNDS_PROBLEMS, strprintf("Failed Invalid Amount Check: %s", receipt.GetStatusMessage()));
+    BOOST_CHECK_MESSAGE(receipt2.GetStatus() == ZTUTL_TRX_FUNDS_PROBLEMS, strprintf("Failed Invalid Amount Check: %s", receipt.GetStatusMessage()));
 
 }
 
@@ -59,9 +61,9 @@ BOOST_AUTO_TEST_CASE(zerocoin_schnorr_signature_test)
 {
     const int NUM_OF_TESTS = 50;
     SelectParams(CBaseChainParams::MAIN);
-    libzerocoin::ZerocoinParams *ZCParams_v1 = Params().GetConsensus().Zerocoin_Params(true);
+    libzerocoin::ZerocoinParams *ZCParams_v1 = Params().Zerocoin_Params(true);
     (void)ZCParams_v1;
-    libzerocoin::ZerocoinParams *ZCParams_v2 = Params().GetConsensus().Zerocoin_Params(false);
+    libzerocoin::ZerocoinParams *ZCParams_v2 = Params().Zerocoin_Params(false);
     (void)ZCParams_v2;
 
     for (int i=0; i<NUM_OF_TESTS; i++) {
@@ -158,8 +160,8 @@ BOOST_AUTO_TEST_CASE(zerocoin_schnorr_signature_test)
 BOOST_AUTO_TEST_CASE(zerocoin_public_spend_test)
 {
     SelectParams(CBaseChainParams::MAIN);
-    libzerocoin::ZerocoinParams *ZCParams_v1 = Params().GetConsensus().Zerocoin_Params(true);
-    libzerocoin::ZerocoinParams *ZCParams_v2 = Params().GetConsensus().Zerocoin_Params(false);
+    libzerocoin::ZerocoinParams *ZCParams_v1 = Params().Zerocoin_Params(true);
+    libzerocoin::ZerocoinParams *ZCParams_v2 = Params().Zerocoin_Params(false);
     (void)ZCParams_v1;
     (void)ZCParams_v2;
 
@@ -224,65 +226,65 @@ BOOST_AUTO_TEST_CASE(zerocoin_public_spend_test)
     CMutableTransaction tx1, tx2, tx3;
     tx1.vout.resize(1);
     tx1.vout[0].nValue = 1*CENT;
-    tx1.vout[0].scriptPubKey = GetScriptForDestination(DecodeDestination("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q"));
+    tx1.vout[0].scriptPubKey = GetScriptForDestination(CBitcoinAddress("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q").Get());
     tx2.vout.resize(1);
     tx2.vout[0].nValue = 1*CENT;
-    tx2.vout[0].scriptPubKey = GetScriptForDestination(DecodeDestination("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q"));
+    tx2.vout[0].scriptPubKey = GetScriptForDestination(CBitcoinAddress("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q").Get());
     tx3.vout.resize(1);
     tx3.vout[0].nValue = 1*CENT;
-    tx3.vout[0].scriptPubKey = GetScriptForDestination(DecodeDestination("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q"));
+    tx3.vout[0].scriptPubKey = GetScriptForDestination(CBitcoinAddress("D9Ti4LEhF1n6dR2hGd2SyNADD51AVgva6q").Get());
 
     CTxIn in1, in2, in3;
 
     // check spendVersion = 3 for v2 coins
     // -----------------------------------
     int spendVersion = 3;
-    BOOST_CHECK_MESSAGE(ZPIVModule::createInput(in1, mint_v2, tx1.GetHash(), spendVersion),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::createInput(in1, mint_v2, tx1.GetHash(), spendVersion),
             "Failed to create zc input for mint v2 and spendVersion 3");
 
     std::cout << "Spend v3 size: " << ::GetSerializeSize(in1, SER_NETWORK, PROTOCOL_VERSION) << " bytes" << std::endl;
 
     PublicCoinSpend publicSpend1(ZCParams_v2);
-    BOOST_CHECK_MESSAGE(ZPIVModule::validateInput(in1, out_v2, tx1, publicSpend1),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::validateInput(in1, out_v2, tx1, publicSpend1),
             "Failed to validate zc input for mint v2 and spendVersion 3");
 
     // Verify that it fails with a different denomination
     in1.nSequence = 500;
     PublicCoinSpend publicSpend1b(ZCParams_v2);
-    BOOST_CHECK_MESSAGE(!ZPIVModule::validateInput(in1, out_v2, tx1, publicSpend1b), "Different denomination for mint v2 and spendVersion 3");
+    BOOST_CHECK_MESSAGE(!ZTUTLModule::validateInput(in1, out_v2, tx1, publicSpend1b), "Different denomination for mint v2 and spendVersion 3");
 
     // check spendVersion = 4 for v2 coins
     // -----------------------------------
     spendVersion = 4;
-    BOOST_CHECK_MESSAGE(ZPIVModule::createInput(in2, mint_v2, tx2.GetHash(), spendVersion),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::createInput(in2, mint_v2, tx2.GetHash(), spendVersion),
             "Failed to create zc input for mint v2 and spendVersion 4");
 
     std::cout << "Spend v4 (coin v2) size: " << ::GetSerializeSize(in2, SER_NETWORK, PROTOCOL_VERSION) << " bytes" << std::endl;
 
     PublicCoinSpend publicSpend2(ZCParams_v2);
-    BOOST_CHECK_MESSAGE(ZPIVModule::validateInput(in2, out_v2, tx2, publicSpend2),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::validateInput(in2, out_v2, tx2, publicSpend2),
             "Failed to validate zc input for mint v2 and spendVersion 4");
 
     // Verify that it fails with a different denomination
     in2.nSequence = 500;
     PublicCoinSpend publicSpend2b(ZCParams_v2);
-    BOOST_CHECK_MESSAGE(!ZPIVModule::validateInput(in2, out_v2, tx2, publicSpend2b), "Different denomination for mint v2 and spendVersion 4");
+    BOOST_CHECK_MESSAGE(!ZTUTLModule::validateInput(in2, out_v2, tx2, publicSpend2b), "Different denomination for mint v2 and spendVersion 4");
 
     // check spendVersion = 4 for v1 coins
     // -----------------------------------
-    BOOST_CHECK_MESSAGE(ZPIVModule::createInput(in3, mint_v1, tx3.GetHash(), spendVersion),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::createInput(in3, mint_v1, tx3.GetHash(), spendVersion),
             "Failed to create zc input for mint v1 and spendVersion 4");
 
     std::cout << "Spend v4 (coin v1) size: " << ::GetSerializeSize(in3, SER_NETWORK, PROTOCOL_VERSION) << " bytes" << std::endl;
 
     PublicCoinSpend publicSpend3(ZCParams_v1);
-    BOOST_CHECK_MESSAGE(ZPIVModule::validateInput(in3, out_v1, tx3, publicSpend3),
+    BOOST_CHECK_MESSAGE(ZTUTLModule::validateInput(in3, out_v1, tx3, publicSpend3),
             "Failed to validate zc input for mint v1 and spendVersion 4");
 
     // Verify that it fails with a different denomination
     in3.nSequence = 500;
     PublicCoinSpend publicSpend3b(ZCParams_v1);
-    BOOST_CHECK_MESSAGE(!ZPIVModule::validateInput(in3, out_v1, tx3, publicSpend3b), "Different denomination for mint v1 and spendVersion 4");
+    BOOST_CHECK_MESSAGE(!ZTUTLModule::validateInput(in3, out_v1, tx3, publicSpend3b), "Different denomination for mint v1 and spendVersion 4");
 
 }
 
