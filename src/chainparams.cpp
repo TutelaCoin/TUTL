@@ -249,31 +249,6 @@ public:
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 22991674;
 
-        /*
-        hashGenesisBlock = uint256("0x01");
-        if (true && genesis.GetHash() != hashGenesisBlock)
-        {
-            printf("recalculating params for mainnet.\n");
-            std::string old_nonce;
-            std::stringstream oldss;
-            oldss << genesis.nNonce;
-            old_nonce = oldss.str();
-            printf("old mainnet genesis nonce: %s\n", old_nonce.c_str());
-            printf("old mainnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
-            // deliberately empty for loop finds nonce value.
-            for(genesis.nNonce == 0; genesis.GetHash() > bnProofOfWorkLimit; genesis.nNonce++){ } 
-            printf("new mainnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
-            std::string new_nonce;
-            std::stringstream newss;
-            newss << genesis.nNonce;
-            new_nonce = newss.str();
-            printf("new mainnet genesis nonce: %s\n", new_nonce.c_str());
-            printf("new mainnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
-
-            exit(0);
-        }
-        */
-
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x000002475f1169755d0277b5de7ba03b780bec8ae742cb59df87d0550877ac52"));
         assert(genesis.hashMerkleRoot == uint256("0xe7a49bcb7b8da235cea1dd025aff771f2246bfcdc0f74da6f18278ff600dd5e7"));
@@ -281,12 +256,15 @@ public:
 		vFixedSeeds.clear();
 		vSeeds.clear();
 
-        /*
         vSeeds.push_back(CDNSSeedData("seed1", "seed1.tutela.io"));
 		vSeeds.push_back(CDNSSeedData("seed2", "seed2.tutela.io"));
 		vSeeds.push_back(CDNSSeedData("seed3", "seed3.tutela.io"));
 		vSeeds.push_back(CDNSSeedData("seed4", "seed4.tutela.io"));
-        */
+		vSeeds.push_back(CDNSSeedData("seed5", "seed5.tutela.io"));
+		vSeeds.push_back(CDNSSeedData("seed6", "seed6.tutela.io"));
+		vSeeds.push_back(CDNSSeedData("seed7", "seed7.tutela.io"));
+		vSeeds.push_back(CDNSSeedData("seed8", "seed8.tutela.io"));
+		vSeeds.push_back(CDNSSeedData("seed9", "seed9.tutela.io"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 65);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 66);
