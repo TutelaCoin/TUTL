@@ -1,0 +1,4 @@
+qt/qt_libbitcoinqt_a-qrc_tutela.o: qt/qrc_tutela.cpp \
+ /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:
