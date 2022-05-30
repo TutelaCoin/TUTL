@@ -47,12 +47,6 @@
         <file alias="tx_input">res/icons/tx_input.png</file>
         <file alias="tx_output">res/icons/tx_output.png</file>
         <file alias="tx_inout">res/icons/tx_inout.png</file>
-        <file alias="unit_tutela">res/icons/unit_tutela.png</file>
-        <file alias="unit_mtutela">res/icons/unit_mtutela.png</file>
-        <file alias="unit_ututela">res/icons/unit_ututela.png</file>
-        <file alias="unit_ttutela">res/icons/unit_ttutela.png</file>
-        <file alias="unit_tmtutela">res/icons/unit_tmtutela.png</file>
-        <file alias="unit_tututela">res/icons/unit_tututela.png</file>
         <file alias="lock_closed">res/icons/lock_closed.png</file>
         <file alias="lock_open">res/icons/lock_open.png</file>
         <file alias="key">res/icons/key.png</file>
