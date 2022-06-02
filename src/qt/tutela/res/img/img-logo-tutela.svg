@@ -1,28 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1280" height="1024" viewBox="0 0 1280 1024" xml:space="preserve">
-<desc>Created with Fabric.js 3.6.3</desc>
-<defs>
-</defs>
-<g transform="matrix(1.9692780337941629 0 0 1.9692780337941629 640.0153846153846 512.012312418764)" id="background-logo"  >
-<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  x="-325" y="-260" rx="0" ry="0" width="650" height="520" />
-</g>
-<g transform="matrix(1.9692780337941629 0 0 1.9692780337941629 640.0153846153846 512.012312418764)" id="logo-logo"  >
-<g style=""  paint-order="stroke"   >
-		<g transform="matrix(0.205 0 0 -0.205 23.288275000000112 58.411271221368736)"  >
-<linearGradient id="SVGID_1_4_441595" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1308.83 -540.838 -397.947 -963.035 4476.6 5094.51)"  x1="0" y1="4.547473508864641e-13" x2="1" y2="4.547473508864641e-13">
-<stop offset="0%" style="stop-color:rgb(0,173,239);stop-opacity: 1"/>
-<stop offset="100%" style="stop-color:rgb(46,49,146);stop-opacity: 1"/>
-</linearGradient>
-<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: url(#SVGID_1_4_441595); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-5011.8099999999995, -4356.01142654994)" d="m 5568.5 4386.41 c 0 0 -47.96 78.63 -95.89 157.27 c -23.97 39.3 -47.93 78.63 -65.92 108.12 l -29.92 49.1 c -89.6 -268.83 -395.31 -124.05 -596.91 -213.65 c -179.22 -89.61 -278.06 -279.12 -361.13 -474.66 c 61.3 -10.39 125.91 37.81 125.91 37.81 c 0 0 224.01 190.41 369.62 201.62 c 212.83 11.2 369.65 -313.63 589.47 -193.32 c 20.42 14.93 38.48 32.95 53.47 53.36 c 29.99 40.83 47.69 91.16 47.69 145.54 c 0 45.59 -12.51 90.17 -36.39 128.81" stroke-linecap="round" />
-</g>
-		<g transform="matrix(0.205 0 0 -0.205 -48.874325 -34.98972877863133)"  >
-<linearGradient id="SVGID_2_5_441596" gradientUnits="userSpaceOnUse" gradientTransform="matrix(859.967 865.378 446.076 -443.286 4112.8 4633.94)"  x1="0" y1="9.094947017729282e-13" x2="1" y2="9.094947017729282e-13">
-<stop offset="0%" style="stop-color:rgb(0,173,239);stop-opacity: 1"/>
-<stop offset="100%" style="stop-color:rgb(46,49,146);stop-opacity: 1"/>
-</linearGradient>
-<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 10; fill: url(#SVGID_2_5_441596); fill-rule: nonzero; opacity: 1;"  paint-order="stroke"  transform=" translate(-4659.74, -4811.700000000001)" d="m 5128.01 5108.87 c -1.1 -28.58 -4.48 -56.7 -10.09 -84.14 c -7.52 -37.07 -18.92 -72.77 -33.51 -106.94 c -136.55 -307.34 -506.17 -251.33 -745.69 -406.54 c -22.42 -15.78 -43.52 -33.19 -63.13 -52.14 c -19.6 -18.95 -37.73 -39.4 -54.2 -61.2 c -4.38 -5.69 -8.71 -11.64 -12.88 -17.69 l -0.22 -0.55 l -16.82 -27.11 c 2.58 6.51 5.61 12.89 8.99 19.04 c 0.09 0.11 0.09 0.21 0.22 0.34 l 17.81 28.9 c 0.1 0.23 0.21 0.45 0.33 0.77 c 0 0 38.97 63.36 77.97 126.7 c 19.49 31.68 38.97 63.33 53.58 87.09 l 128.12 208.17 c 19.58 31.84 41.62 67.68 63.64 103.5 c 66.12 107.48 132.24 214.94 132.24 214.94 l 13.99 22.75 c 46.15 66.42 121.76 106.08 202.54 106.08 c 86.23 0 164.76 -43.91 209.9 -117.17 l 27.21 -44.8" stroke-linecap="round" />
-</g>
-</g>
-</g>
+<?xml version="1.0" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="100">
+<path style="fill:#010101; stroke:none;" d="M0 0L0 100L350 100L350 0L0 0z"/>
+<path style="fill:#5f60ae; stroke:none;" d="M27 73L27 42L28.6034 30.7276L47 25L47 73C47 80.3617 44.8893 88.0707 53 91L53 10C44.8839 10.7077 23.5003 14.1831 17.6034 19.8542C14.5866 22.7554 16 30.198 16 34C16 47.4272 15.5915 63.5468 27 73z"/>
+<path style="fill:#b983d9; stroke:none;" d="M53 10L53 91C60.9638 88.5553 59 80.9611 59 74L59 25L77.3966 30.7276L79 42L79 73C90.7728 63.7607 90 47.4111 90 34C90 30.198 91.4134 22.7554 88.3966 19.8542C82.4245 14.1107 61.1915 10.7143 53 10z"/>
+<path style="fill:#d52bff; stroke:none;" d="M67 13L68 14L67 13z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M31 15L32 16L31 15M78 16L79 17L78 16z"/>
+<path style="fill:#5f60ae; stroke:none;" d="M129 36L123 36L123 45L129 45L129 75L139 75L139 45L148 45L148 36L139 36L139 19C128.594 20.7989 129 26.943 129 36M203 36L197 36L197 45L203 45L203 75L212 75L212 45L221 45L221 36L212 36L212 19C201.924 21.3406 203 26.9377 203 36M275 19L275 75L284 75L284 19L275 19z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M133 20L134 21L133 20M129 22L130 23L129 22z"/>
+<path style="fill:#5f60ae; stroke:none;" d="M157 34C157 43.9496 153.366 62.7937 160.558 70.6597C166.269 76.9071 179.005 76.63 184.196 69.892C188.956 63.7137 190.901 43.4388 187.397 36.3179C185.893 33.2634 180.107 33.2635 178.603 36.3179C175.095 43.447 180.267 53.5362 177.397 60.9807C175.481 65.9483 169.826 66.7638 167.179 61.9414C164.921 57.8276 166 51.5287 166 47L166 34L157 34M263 62C252.392 65.5359 245.768 68.0813 238 58L267 58C266.98 50.7463 266.202 42.3908 259.906 37.6528C248.058 28.7371 230.241 37.7936 229.093 52C228.458 59.8684 231.064 67.6462 238.004 72.0054C249.133 78.9968 262.999 75.4737 263 62M325 71L325 75L334 75L334 37L325 37L325 41C322.291 38.5706 319.651 36.2317 316 35.3943C285.007 28.2862 284.318 82.5713 315 76.6597C318.985 75.8919 321.98 73.549 325 71z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M297 40L298 41L297 40z"/>
+<path style="fill:#010101; stroke:none;" d="M238 50L257 50C253.946 39.2392 242.423 41.679 238 50M311.001 44.5486C296.667 47.6209 300.521 70.2401 315 67.4267C329.762 64.5582 325.536 41.4333 311.001 44.5486z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M303 49L304 50L303 49M17 56L18 57L17 56M85 64L86 65L85 64M169 65L170 66L169 65M253 65L254 66L253 65z"/>
+<path style="fill:#b983d9; stroke:none;" d="M184 69L185 70L184 69z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M80 72L81 73L80 72M261 72L262 73L261 72z"/>
+<path style="fill:#5f60ae; stroke:none;" d="M79 73L80 74L79 73z"/>
+<path style="fill:#2a2aeb; stroke:none;" d="M320 74L321 75L320 74M51 90L52 91L51 90z"/>
 </svg>
