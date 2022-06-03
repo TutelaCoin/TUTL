@@ -108,7 +108,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-cold-staking"]:checked {
@@ -126,7 +126,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-cold-staking-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-cold-staking-active"] {
@@ -147,7 +147,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-settings"]:checked {
@@ -165,7 +165,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-settings-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-settings-active"] {
@@ -182,7 +182,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-dash"]:checked {
@@ -201,7 +201,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-dashboard-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-dash-active"] {
@@ -218,7 +218,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-send"]:checked {
@@ -236,7 +236,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-send-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-send-active"] {
@@ -253,7 +253,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-address"]:checked {
@@ -271,7 +271,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-address-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-address-active"] {
@@ -288,7 +288,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 30px;
     background-color:transparent;
     font-size:14px;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-master"]:checked {
@@ -307,7 +307,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-icon: url("://ic-nav-master-hover");
     qproperty-iconSize: 24px 30px;
     background-color: #1A000000;
-    color: #ffffff;
+    color: #14AEF5;
 }
 
 *[cssClass="btn-nav-master-active"] {
