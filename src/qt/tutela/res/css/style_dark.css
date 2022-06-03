@@ -1097,8 +1097,8 @@ QPushButton[cssClass="btn-check-right"]:checked:hover {
 }
 
 QPushButton[cssClass="btn-check-right"]:checked:pressed {
-    border:  1px solid #030A42;
-    background-color:#030A42;
+    border:  1px solid #B5F2FF;
+    background-color:#B5F2FF;
     font-size:18px;
     padding:4px;
     color: #E8C1FF;
@@ -1156,8 +1156,8 @@ QPushButton[cssClass="btn-check-left"]:checked:hover {
 }
 
 QPushButton[cssClass="btn-check-left"]:checked:pressed {
-    border:  1px solid #030a42;
-    background-color:#030a42;
+    border:  1px solid #B5F2FF;
+    background-color:#B5F2FF;
     font-size:18px;
     padding:4px;
     color: #E8C1FF;
@@ -1224,8 +1224,8 @@ QPushButton[cssClass="btn-primary"]:hover {
 }
 
 QPushButton[cssClass="btn-primary"]:pressed {
-    border:  1px solid #030a42;
-    background-color:#030a42;
+    border:  1px solid #B5F2FF;
+    background-color:#B5F2FF;
     font-size:18px;
     padding:4px 10px;
     color: #E8C1FF;
@@ -1763,7 +1763,7 @@ QPushButton[cssClass="btn-chart-arrow"]:hover {
 }
 
 QPushButton[cssClass="btn-chart-arrow"]:pressed {
-    background-color:#030A42;
+    background-color:#B5F2FF;
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"] {
@@ -1779,7 +1779,7 @@ QPushButton[cssClass="btn-chart-arrow-right"]:hover {
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"]:pressed {
-    background-color:#030A42;
+    background-color:#B5F2FF;
 }
 
 QComboBox[cssClass="btn-combo-secundary"] {
@@ -1839,7 +1839,7 @@ QComboBox[cssClass="btn-combo-chart-selected"]:on {
 }
 
 QComboBox[cssClass="btn-combo-chart-selected"]:disabled {
-    background-color:#030A42;
+    background-color:#B5F2FF;
     padding:6px 12px 6px 6px;
     font-size:16px;
     border:1px solid #E8C1FF;
@@ -1881,7 +1881,7 @@ QPushButton[cssClass="btn-check-time"]:hover {
 }
 
 QPushButton[cssClass="btn-check-time"]:pressed {
-    background-color:#030A42;
+    background-color:#B5F2FF;
     border-radius:2px;
     font-size:14px;
     padding:4px;
@@ -1889,7 +1889,7 @@ QPushButton[cssClass="btn-check-time"]:pressed {
 }
 
 QPushButton[cssClass="btn-check-time"]:disabled {
-    background-color:#030A42;
+    background-color:#B5F2FF;
     border-radius:2px;
     font-size:14px;
     padding:4px;
