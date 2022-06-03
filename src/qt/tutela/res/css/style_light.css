@@ -3120,12 +3120,12 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 
 *[cssClass="container-snackbar"]{
-    background-color:#070842;
+    background-color:#D1F5FF;
     border-top:2px solid #14AEF5;
 }
 
 *[cssClass="text-snackbar"]{
-    color:#FFFFFF;
+    color:#4e4fb7;
     font-size:20px;
 }
 
