@@ -423,7 +423,6 @@ RES_ICONS = \
   qt/tutela/res/img/ic-check-peers.svg \
   qt/tutela/res/img/ic-nav-master-active.svg \
   qt/tutela/res/img/ic-watch-password-white.svg \
-  qt/tutela/res/img/bg-welcome-container.jpg \
   qt/tutela/res/img/bg-welcome-container.png \
   qt/tutela/res/img/bg-welcome-container.svg \
   qt/tutela/res/img/bg-welcome-container@2x.png \

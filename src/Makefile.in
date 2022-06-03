@@ -820,7 +820,6 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/tutela/res/img/ic-check-peers.svg \
 	qt/tutela/res/img/ic-nav-master-active.svg \
 	qt/tutela/res/img/ic-watch-password-white.svg \
-	qt/tutela/res/img/bg-welcome-container.jpg \
 	qt/tutela/res/img/bg-welcome-container.png \
 	qt/tutela/res/img/bg-welcome-container.svg \
 	qt/tutela/res/img/bg-welcome-container@2x.png \
@@ -3238,7 +3237,6 @@ EXTRA_DIST =
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-check-peers.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-master-active.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-watch-password-white.svg \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container.jpg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container.png \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container@2x.png \
