@@ -286,8 +286,6 @@
         <file alias="bg-welcome-2x">tutela/res/img/bg-welcome@2x.jpg</file>
         <file alias="bg-welcome-3x">tutela/res/img/bg-welcome@3x.jpg</file>
         <file alias="img-logo-tutela">tutela/res/img/img-logo-tutela.svg</file>
-        <file alias="bg-welcome-svg">tutela/res/img/bg-welcome.svg</file>
-        <file alias="bg-welcome-container">tutela/res/img/bg-welcome-container.svg</file>
         <file alias="bg-welcome">tutela/res/img/bg-welcome.png</file>
         <file alias="bg-welcome-container-png">tutela/res/img/bg-welcome-container.png</file>
         <file alias="bg-welcome-container-2x">tutela/res/img/bg-welcome-container@2x.png</file>

@@ -424,14 +424,11 @@ RES_ICONS = \
   qt/tutela/res/img/ic-nav-master-active.svg \
   qt/tutela/res/img/ic-watch-password-white.svg \
   qt/tutela/res/img/bg-welcome-container.png \
-  qt/tutela/res/img/bg-welcome-container.svg \
   qt/tutela/res/img/bg-welcome-container@2x.png \
   qt/tutela/res/img/bg-welcome-container@3x.png \
   qt/tutela/res/img/ic-check-staking-off.svg \
   qt/tutela/res/img/ic-nav-master-hover.svg \
   qt/tutela/res/img/ic-watch-password.svg \
-  qt/tutela/res/img/bg-welcome.jpg \
-  qt/tutela/res/img/bg-welcome.svg \
   qt/tutela/res/img/bg-welcome@2x.jpg \
   qt/tutela/res/img/bg-welcome@3x.jpg \
   qt/tutela/res/img/bg-welcome.png \
