@@ -809,7 +809,6 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/tutela/res/img/ic-nav-cold-staking-active.svg \
 	qt/tutela/res/img/ic-nav-dashboard-active.svg \
 	qt/tutela/res/img/ic-wallet-status-locked.svg \
-	qt/tutela/res/img/bg-splash.svg \
 	qt/tutela/res/img/bg-splash.png \
 	qt/tutela/res/img/ic-check-mint.svg \
 	qt/tutela/res/img/ic-nav-dashboard-hover.svg \
@@ -821,13 +820,9 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/tutela/res/img/ic-nav-master-active.svg \
 	qt/tutela/res/img/ic-watch-password-white.svg \
 	qt/tutela/res/img/bg-welcome-container.png \
-	qt/tutela/res/img/bg-welcome-container@2x.png \
-	qt/tutela/res/img/bg-welcome-container@3x.png \
 	qt/tutela/res/img/ic-check-staking-off.svg \
 	qt/tutela/res/img/ic-nav-master-hover.svg \
 	qt/tutela/res/img/ic-watch-password.svg \
-	qt/tutela/res/img/bg-welcome@2x.jpg \
-	qt/tutela/res/img/bg-welcome@3x.jpg \
 	qt/tutela/res/img/bg-welcome.png \
 	qt/tutela/res/img/ic-check-staking.svg \
 	qt/tutela/res/img/ic-nav-master.svg \
@@ -3223,7 +3218,6 @@ EXTRA_DIST =
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-cold-staking-active.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-dashboard-active.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-wallet-status-locked.svg \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-splash.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-splash.png \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-check-mint.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-dashboard-hover.svg \
@@ -3235,14 +3229,10 @@ EXTRA_DIST =
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-master-active.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-watch-password-white.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container.png \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container@2x.png \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome-container@3x.png \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-check-staking-off.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-master-hover.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-watch-password.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome.svg \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome@2x.jpg \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome@3x.jpg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-welcome.png \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-check-staking.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-master.svg \
