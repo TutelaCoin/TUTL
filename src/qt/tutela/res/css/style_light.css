@@ -57,7 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #000000, stop:0.5 #000000, stop: 1 #003b61);
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #D1F5FF, stop:0.5 #B5F2FF, stop: 1 #BFC0FF);
 }
 
 QPushButton[cssClass="img-nav-logo-tutela"] {
