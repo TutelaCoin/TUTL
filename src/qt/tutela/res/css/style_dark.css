@@ -71,13 +71,13 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #070606;
+    color: #D1F5FF;
 }
 
 *[cssClass="btn-nav-receive"]:checked {
     background-color: #070606;
     font-size:14px;
-    color: #FFFFFF;
+    color: #D1F5FF;
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover  {
@@ -87,7 +87,7 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
 
 *[cssClass="btn-nav-receive"]:hover {
     background-color: #070606;
-    color: #FFFFFF;
+    color: #D1F5FF;
 }
 
 *[cssClass="btn-nav-receive-active"] {
