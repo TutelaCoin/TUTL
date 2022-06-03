@@ -2023,9 +2023,9 @@ Are you sure?</source>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>语言缺失或翻译不完整?帮助贡献翻译在这里:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4047,7 +4047,7 @@ Tutela使用了一个股权证明(PoS)一致系统算法，
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4055,7 +4055,7 @@ Tutela使用了一个股权证明(PoS)一致系统算法，
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 zTUTL是一种可选的以隐私为中心的隐私币
 它是Tutela区块链的一员，基本上在任何块资源管理器
-所有的交易都不能被跟踪&lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+所有的交易都不能被跟踪&lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
 
 你可以阅读更多关于技术方面的文章&lt;/a&gt;
 
@@ -6099,7 +6099,7 @@ Tutela核心钱包</translation>
         <translation>您必须在配置中指定一个主节点privkey。有关帮助，请参阅文档。</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
+        <source>(7429 could be used only on mainnet)</source>
         <translation>(43013只可在网上使用)</translation>
     </message>
     <message>
@@ -6111,7 +6111,7 @@ Tutela核心钱包</translation>
         <translation>(默认: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
+        <source>(must be 7429 for mainnet)</source>
         <translation>(主网必须为43013)</translation>
     </message>
     <message>

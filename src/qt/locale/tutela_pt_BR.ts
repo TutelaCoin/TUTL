@@ -1766,9 +1766,9 @@ Você tem certeza?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Linguagem não encontrada ou tradução incompleta? Ajude contribuido com traduções aqui:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Connect to the Tutela network through a SOCKS5 proxy.</source>
@@ -3525,8 +3525,8 @@ Endereço: %4
         <translation>Você deve especificar uma masternodeprivkey na configuração. Favor verificar o manual para obter ajuda.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 could be used only on mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 could be used only on mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3537,8 +3537,8 @@ Endereço: %4
         <translation>(padrão: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(deve ser 17178 para mainnet)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(deve ser 7429 para mainnet)</translation>
     </message>
     <message>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>

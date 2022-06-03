@@ -2021,9 +2021,9 @@ Weet je het zeker?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Taal ontbreekt of vertaling onvolledig? Help om bij te dragen aan vertalingen:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4046,7 +4046,7 @@ Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translatio
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4055,7 +4055,7 @@ Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translatio
                            zTUTL is een optionele privacy-gerichte methode om munten te mengen op de
                            Tutela blockchain. In principe kunnen al uw transacties niet worden gevolgd
                            op enige block explorer. U kunt meer lezen over de technische gegevens in de
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technische Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4105,7 +4105,7 @@ Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translatio
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zTUTL in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4122,7 +4122,7 @@ Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translatio
                            en je portemonnee herstarten om automuntering uit te schakelen.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Je kan meer lezen over zTUTL in de
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technische Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technische Paper"&lt;/a&gt;.
                            Als u uw zTUTL wilt behouden en staken, lees dan de "Hoe stake ik"
                            sectie in onderstaande FAQ.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -6137,8 +6137,8 @@ Tutela Core Portemonnee</translation>
         <translation>Je moet een masternodeprivkey opgeven in de configuratie. Raadpleeg de documentatie voor hulp.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 kan alleen op mainnet worden gebruikt)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 kan alleen op mainnet worden gebruikt)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6149,8 +6149,8 @@ Tutela Core Portemonnee</translation>
         <translation>(standaard: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(moet 17178 voor mainnet zijn)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(moet 7429 voor mainnet zijn)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

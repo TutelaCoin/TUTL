@@ -1478,9 +1478,9 @@ do stakingu</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Brakuje języka bądź nieukończona pełnego tłumaczenia? Pomóż w tłumaczeniu tutaj:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations </translation>
+https://www.transifex.com/tutela/tutela-translations </translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -3962,8 +3962,8 @@ Sprawdź adres i spróbuj ponownie.</translation>
         <translation>Musisz określić masternodeprivkey w konfiguracji. Aby uzyskać pomoc, zapoznaj się z dokumentacją.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 może być używany tylko w sieci mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 może być używany tylko w sieci mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3974,8 +3974,8 @@ Sprawdź adres i spróbuj ponownie.</translation>
         <translation>(domyślnie: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(musi być 17178 dla mainnetu)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(musi być 7429 dla mainnetu)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

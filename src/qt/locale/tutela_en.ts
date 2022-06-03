@@ -2648,7 +2648,7 @@ Are you sure?</source>
     <message>
         <location line="+21"/>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5305,7 +5305,7 @@ Verify that you have installed a predetermined text editor.</source>
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://tutela.io/zpiv/&apos;&gt;
+                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://Tutela.org/zpiv/&apos;&gt;
                            &quot;Tutela Zerocoin (zTUTL) Technical Paper&quot;&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -5356,7 +5356,7 @@ Verify that you have installed a predetermined text editor.</source>
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            You can read more about zTUTL in the
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://tutela.io/zpiv/&apos;&gt; &quot;Tutela Zerocoin (zTUTL) Technical Paper&quot;&lt;/a&gt;.
+                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://Tutela.org/zpiv/&apos;&gt; &quot;Tutela Zerocoin (zTUTL) Technical Paper&quot;&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the &quot;How do I stake&quot;
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -5457,7 +5457,7 @@ Verify that you have installed a predetermined text editor.</source>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://discord.tutela.io&apos;&gt;
+                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://discord.Tutela.org&apos;&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
                            &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://Tutela.freshdesk.com&apos;&gt;
@@ -8012,8 +8012,8 @@ Tutela Core Wallet</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation type="unfinished">(17178 could be used only on mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation type="unfinished">(7429 could be used only on mainnet)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -8027,7 +8027,7 @@ Tutela Core Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>(must be 17178 for mainnet)</source>
+        <source>(must be 7429 for mainnet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

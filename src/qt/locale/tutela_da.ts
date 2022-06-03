@@ -1434,9 +1434,9 @@ Den vil starte automatisk så snart at pungen har nok bekræftelser på nogen af
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Det valgte sprog mangler, eller oversættelsen er mangelfuld. Hjælp ved at bidrage med oversættelser her:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -3736,8 +3736,8 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Der skal angives en masternodeprivkey i konfigurationen. For mere information, se i dokumentationen.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 kunne kun bruges på hovednettet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 kunne kun bruges på hovednettet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3748,8 +3748,8 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>(default: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(skal være 17178 for hovednettet)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(skal være 7429 for hovednettet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

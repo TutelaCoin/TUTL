@@ -2020,9 +2020,9 @@ Confirmez-vous?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Langue manquante ou traduction incomplète? Aidez-nous à traduire ce projet ici:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4044,14 +4044,14 @@ pour voir votre solde de monnaie dépensable sur le réseau.
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 zTUTL est une méthode optionnelle de fongibilité des pièces sur la blockchain Tutela, axée sur la confidentialité. Basiquement, cela permet rendre vos transactions intraçables par les explorateurs de blocs. Vous pouvez en savoir plus sur les aspects techniques en consultant le document
-&lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+&lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
  "Tutela Zerocoin (zTUTL) Technical Paper".&lt;/a&gt;
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </translation>
@@ -4101,7 +4101,7 @@ mon solde en zTUTL?</translation>
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zTUTL in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4117,7 +4117,7 @@ votre fichier tutela.conf et ajouter &lt;i&gt; enablezeromint=0&lt;/i&gt; sans g
 et redémarrer votre portefeuille.&lt;/p&gt;
 &lt;/p&gt;&lt;p align="justify"&gt;
 Vous pouvez en savoir plus sur zTUTL dans
-&lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; le document "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+&lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; le document "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
 Si vous voulez conserver et mettre en jeu vos zTUTL, veuillez lire la section "Comment staker"
 de la FAQ ci-dessous.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -6125,8 +6125,8 @@ Portefeuille Tutela Core</translation>
         <translation>Vous devez spécifier une masternodeprivkey dans la configuration. Veuillez consulter la documentation pour obtenir de l'aide.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 ne peut être utilisé que pour le mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 ne peut être utilisé que pour le mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6137,8 +6137,8 @@ Portefeuille Tutela Core</translation>
         <translation>(default: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(doit être 17178 pour le mainnet)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(doit être 7429 pour le mainnet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

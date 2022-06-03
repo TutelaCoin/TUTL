@@ -2023,9 +2023,9 @@ Sei sicuro?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Lingua mancante o traduzione incompleta? Aiutaci a contribuire alle traduzioni qui:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4048,7 +4048,7 @@ per vedere e spendere i saldi sulla rete.
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4057,7 +4057,7 @@ per vedere e spendere i saldi sulla rete.
                            zTUTL è un metodo opzionale incentrato sulla privacy per la miscelazione delle valute sulla
 Blockchain Tutela. Essenzialmente, tutte le tue transazioni non potranno essere tracciate
 su un block explorer. Puoi leggere di più sugli aspetti tecnici nel
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4107,7 +4107,7 @@ per diventare idoneo alla spesa.
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zTUTL in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4124,7 +4124,7 @@ il tuo file tutela.conf e aggiungere&lt;i&gt;enablezeromint=0&lt;/i&gt; senza gl
 e far ripartire il portafoglio per disabilitare la forgiatura automatica.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Puoi leggere di più su zTUTL nel
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            Se desideri effettuare lo staking dei tuoi zTUTL, leggi "Come faccio ad effettuare lo staking"
 nella sezione delle FAQ di seguito.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -6139,8 +6139,8 @@ Portafoglio Tutela Core.</translation>
         <translation>È necessario specificare una chiave masternodepriv nella configurazione. Consultare la documentazione per assistenza.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 potrebbe essere utilizzato solo su mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 potrebbe essere utilizzato solo su mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6151,8 +6151,8 @@ Portafoglio Tutela Core.</translation>
         <translation>(default: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(deve essere 17178 per mainnet)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(deve essere 7429 per mainnet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

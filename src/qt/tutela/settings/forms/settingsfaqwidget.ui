@@ -712,7 +712,7 @@
                       <item>
                        <widget class="QLabel" name="labelContent3">
                         <property name="text">
-                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;We have support channels in most of our official chat groups, for example &lt;a href=&quot;https://discord.tutela.io&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#b088ff;&quot;&gt;#support in our Discord&lt;/span&gt;&lt;/a&gt;. If you prefer to submit a ticket, One can be &lt;a href=&quot;https://Tutela.freshdesk.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#b088ff;&quot;&gt;our Freshdesk support site&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;We have support channels in most of our official chat groups, for example &lt;a href=&quot;https://discord.Tutela.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#b088ff;&quot;&gt;#support in our Discord&lt;/span&gt;&lt;/a&gt;. If you prefer to submit a ticket, One can be &lt;a href=&quot;https://Tutela.freshdesk.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#b088ff;&quot;&gt;our Freshdesk support site&lt;/span&gt;&lt;/a&gt;. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

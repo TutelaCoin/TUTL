@@ -2018,9 +2018,9 @@ Are you sure?</source>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>¿Falta su lenguaje o la traducción está incompleta? Contribuya con las traducciones aquí:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4030,14 +4030,14 @@ Tu cartera Tutela también necesita estar completamente sincronizada para que pu
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt; 
 zTUTL es un método opcional centrado en la privacidad de monedas en la Blockchain Tutela. Básicamente, todas sus transacciones no pueden ser rastreadas en ningún explorador de bloques. Puedes leer más sobre los aspectos técnicos en el
- &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+ &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
 "Documentación Técnica de Tutela Zerocoin (zTUTL) ". &lt;/a&gt;. 
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </translation>
@@ -4082,7 +4082,7 @@ zTUTL es un método opcional centrado en la privacidad de monedas en la Blockcha
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zTUTL in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4099,7 +4099,7 @@ tu archivo tutela.conf y agregar &lt;i&gt; enablezeromint=0&lt;/i&gt; Sin las co
 luego reinicia tu tutelaera para deshabilitar la impresión automática.&lt;/p&gt;
 &lt;/p&gt;&lt;p align="justify"&gt;
 Puedes leer más sobre zTUTL en el
-&lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Documentación Técnica de Tutela Zerocoin (zTUTL)" &lt;/a&gt;.
+&lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Documentación Técnica de Tutela Zerocoin (zTUTL)" &lt;/a&gt;.
 Si deseas conservar y hacer stake tu zTUTL, lee la sección "¿Cómo puedo hacer stake?"de las preguntas frecuentes a continuación.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -6073,8 +6073,8 @@ Tutela Core Wallet</translation>
         <translation>Debes especificar un masternodeprivkey en la configuración. Por favor mira la documentación por ayuda.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 puede ser utilizado solo en mainnet)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 puede ser utilizado solo en mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6085,8 +6085,8 @@ Tutela Core Wallet</translation>
         <translation>(predeterminado: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(debe ser 17178 para un mainnet)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(debe ser 7429 para un mainnet)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>

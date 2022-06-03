@@ -2023,9 +2023,9 @@ Emin misiniz?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</source>
+https://www.transifex.com/tutela/tutela-translations</source>
         <translation>Dil eksik veya çeviri tamamlanmamış mı? Katkıda bulunan çevirilere yardımcı olun:
-https://www.transifex.com/TutelaCoin/TutelaCoin-translations</translation>
+https://www.transifex.com/tutela/tutela-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -4046,7 +4046,7 @@ bu sayede Tutela sahipleri blok ödülü kazanımına katılabilmektedir
                            zTUTL is an optional privacy-centric method of coin mixing on the
                            Tutela blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4056,7 +4056,7 @@ bu sayede Tutela sahipleri blok ödülü kazanımına katılabilmektedir
 gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
  hiçbir tarayıcı tarafından takip edilemez. Teknik detayları
  hakkında daha çok bilgi almak için
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt;
                            "Tutela Zerocoin (zTUTL) Teknik Makalesi"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4106,7 +4106,7 @@ gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zTUTL in the
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zTUTL, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4116,7 +4116,7 @@ gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
                            Tutela cüzdanınız ağa destek olmak için varsayılan olarak tüm TUTL bakiyenizin 10% 'unu zTUTL'e dönüştürecektir. Getirdiği gizlilik avantajını istemiyor veya zTUTL stakelemek istemiyorsanız cüzdanınızın otomint özelliğini Ayarlar-&gt;Seçenekler içindeki “zTUTL Otomint etkin” seçeneğini değiştirerek devredışı bırakabilirsiniz. TutelaQT veya GUI kullanmıyorsanız, tutela.conf dosyası içine  &lt;i&gt;enablezeromint=0&lt;/i&gt; ifadesini tırnak işareti olmadan girerek devredışı bırakabilirsiniz. &lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Teknik detayları hakkında daha çok bilgi almak için
-                           &lt;a style='color: #b088ff' href='https://tutela.io/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Teknik Makalesi"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://Tutela.org/zpiv/'&gt; "Tutela Zerocoin (zTUTL) Teknik Makalesi"&lt;/a&gt;.
                            zTUTL'lerinizi tutmak ve stakelemek istiyorsanız, lütfen SSS kısmındaki "Nasıl Stake yaparım" 
 kısmını okuyunuz. 
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -6132,8 +6132,8 @@ Hoşgeldiniz</translation>
         <translation>Konfigürasyonda bir masternodeprivkey belirlemelisiniz.  Lütfen dokümantasyona bakınız.</translation>
     </message>
     <message>
-        <source>(17178 could be used only on mainnet)</source>
-        <translation>(17178 sadece mainnet üzerinde kullanılabilir)</translation>
+        <source>(7429 could be used only on mainnet)</source>
+        <translation>(7429 sadece mainnet üzerinde kullanılabilir)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -6144,8 +6144,8 @@ Hoşgeldiniz</translation>
         <translation>(default: 1)</translation>
     </message>
     <message>
-        <source>(must be 17178 for mainnet)</source>
-        <translation>(mainnet için 17178 olmalıdır)</translation>
+        <source>(must be 7429 for mainnet)</source>
+        <translation>(mainnet için 7429 olmalıdır)</translation>
     </message>
     <message>
         <source>Accept command line and JSON-RPC commands</source>
