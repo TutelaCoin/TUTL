@@ -323,26 +323,26 @@ HH       TOP BAR
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-top"] {
-    background-color:#BFC0FF;
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #D1F5FF, stop:0.5 #B5F2FF, stop: 1 #BFC0FF);
 }
 
 *[cssClass="container-topbar-no-image"] {
-    background-color:#BFC0FF;
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #D1F5FF, stop:0.5 #B5F2FF, stop: 1 #BFC0FF);
 }
 
 *[cssClass="text-title-topbar"] {
-    color:#a3a3a4;
+    color:#4e4fb7;
     font-size:16px;
     font-weight: ligther;
 }
 
 *[cssClass="amount-topbar"] {
-    color:#FFFFFF;
+    color:#4e4fb7;
     font-size:35px;
 }
 
 *[cssClass="amount-small-topbar"] {
-    color:#FFFFFF;
+    color:#4e4fb7;
     font-size:22px;
 }
 
