@@ -3,37 +3,37 @@ HH       CONTAINER
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
 }
 
 *[cssClass="container-border"] {
-    background-color:#4e4fb7;
-    border:  1px solid #4e4fb7;
+    background-color:#0c1319;
+    border:  1px solid #0c1319;
 }
 
 *[cssClass="container-border-light"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border:  1px solid #33FFFFFF;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border-left:  1px solid #33FFFFFF;
 }
 
 *[cssClass="container-right"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border-left:  1px solid #33FFFFFF;
 }
 
 *[cssClass="container-square"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border:  1px solid #33FFFFFF;
 }
 
 *[cssClass="container-options"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border-bottom: 1px solid #bababa;
 }
 
@@ -47,7 +47,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-border-purple"] {
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border:  1px solid #091785;
     border-radius:2px;
 }
@@ -1673,11 +1673,11 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 QComboBox#comboBoxSortType {
-    background-color: #4e4fb7;
+    background-color: #0c1319;
 }
 
 QComboBox#comboBoxSort {
-    background-color: #4e4fb7;
+    background-color: #0c1319;
 }
 
 QProgressBar[cssClass="progress-splash"]::chunk:horizontal {
@@ -2503,7 +2503,7 @@ QPushButton[cssClass="btn-settings-check"] {
     background-image: url("://ic-arrow-drop-down-white");
     background-position:right center;
     background-repeat:no-repeat;
-    background-color: #4e4fb7;
+    background-color: #0c1319;
     border:none;
     border-bottom:1px solid #bababa;
     font-size:20px;
@@ -2515,7 +2515,7 @@ QPushButton[cssClass="btn-settings-check"]:checked {
     background-image: url("://ic-arrow-drop-up-white");
     background-position:right center;
     background-repeat:no-repeat;
-    background-color:#4e4fb7;
+    background-color:#0c1319;
     border:none;
     border-bottom:1px solid #02083b;
     font-size:20px;
