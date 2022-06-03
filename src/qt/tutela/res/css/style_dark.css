@@ -2507,7 +2507,7 @@ QPushButton[cssClass="btn-settings-options"]:checked {
 }
 
 QPushButton[cssClass="btn-settings-options"]:hover {
-    background-color: rgba(7, 17, 98, 0.7);
+    background-color:#E8C1FF;
     border:none;
     font-size:20px;
     color: #FFFFFF;
