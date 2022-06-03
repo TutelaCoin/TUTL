@@ -42,13 +42,13 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-purple"] {
-    background-color:#091785;
+    background-color:#E8C1FF;
     border:  0;
 }
 
 *[cssClass="container-border-purple"] {
     background-color:#0c1319;
-    border:  1px solid #091785;
+    border:  1px solid #E8C1FF;
     border-radius:2px;
 }
 
