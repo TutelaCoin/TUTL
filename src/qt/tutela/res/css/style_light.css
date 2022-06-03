@@ -323,12 +323,11 @@ HH       TOP BAR
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-top"] {
-    background-color:#003b61;
-    border-image: url("://bg-dashboard-banner") 0 0 0 0 stretch stretch;
+    background-color:#BFC0FF;
 }
 
 *[cssClass="container-topbar-no-image"] {
-    background-color:#003b61;
+    background-color:#BFC0FF;
 }
 
 *[cssClass="text-title-topbar"] {
