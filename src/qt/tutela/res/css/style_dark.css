@@ -57,8 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #070606, stop: 1 #070606);
-    /*border-right: 1px solid rgba(73, 99, 145, 0.7);*/
+    background-color: #070606;
 }
 
 QPushButton[cssClass="img-nav-logo-tutela"] {
@@ -72,23 +71,23 @@ QPushButton[cssClass="img-nav-logo-tutela"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #1247a3;
+    color: #070606;
 }
 
 *[cssClass="btn-nav-receive"]:checked {
-    background-color: #02083b;
+    background-color: #070606;
     font-size:14px;
-    color: #14AEF5;
+    color: #FFFFFF;
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover  {
-    background-color: #02083b;
-    color: #14AEF5;
+    background-color: #070606;
+    color: #D1F5FF;
 }
 
 *[cssClass="btn-nav-receive"]:hover {
-    background-color: #1A000000;
-    color: #1247a3;
+    background-color: #070606;
+    color: #FFFFFF;
 }
 
 *[cssClass="btn-nav-receive-active"] {
