@@ -798,7 +798,6 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/res/icons/ic-transaction-staked.svg \
 	qt/res/icons/yesvote.png \
 	qt/res/icons/novote.png qt/res/icons/abstainvote.png \
-	qt/tutela/res/img/bg-dashboard-banner.png \
 	qt/tutela/res/img/bg-multi-number-dark.svg \
 	qt/tutela/res/img/ic-check-locked.svg \
 	qt/tutela/res/img/ic-nav-address.svg \
@@ -3207,7 +3206,6 @@ EXTRA_DIST =
 @ENABLE_QT_TRUE@  qt/res/icons/yesvote.png \
 @ENABLE_QT_TRUE@  qt/res/icons/novote.png \
 @ENABLE_QT_TRUE@  qt/res/icons/abstainvote.png \
-@ENABLE_QT_TRUE@  qt/tutela/res/img/bg-dashboard-banner.png \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/bg-multi-number-dark.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-check-locked.svg \
 @ENABLE_QT_TRUE@  qt/tutela/res/img/ic-nav-address.svg \

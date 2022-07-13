@@ -401,7 +401,6 @@ RES_ICONS = \
   qt/res/icons/yesvote.png \
   qt/res/icons/novote.png \
   qt/res/icons/abstainvote.png \
-  qt/tutela/res/img/bg-dashboard-banner.png \
   qt/tutela/res/img/bg-multi-number-dark.svg \
   qt/tutela/res/img/ic-check-locked.svg \
   qt/tutela/res/img/ic-nav-address.svg \

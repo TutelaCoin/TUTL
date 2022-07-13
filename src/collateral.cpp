@@ -22,13 +22,15 @@ CAmount CollateralRequired(int nHeight)
     if (nHeight > 1200000) return    35000 * COIN;
     if (nHeight > 1100000) return    30000 * COIN;
     if (nHeight > 1000000) return    25000 * COIN;
-    if (nHeight >  900000) return    20000 * COIN;
-    if (nHeight >  800000) return    15000 * COIN;
-    if (nHeight >  700000) return    10000 * COIN;
+    if (nHeight >  900000) return    10000 * COIN;
+    if (nHeight >  800000) return     9000 * COIN;
+    if (nHeight >  700000) return     8000 * COIN;
     if (nHeight >  600000) return     7000 * COIN;
-    if (nHeight >  500000) return     5000 * COIN;
-    if (nHeight >  400000) return     3000 * COIN;
-    if (nHeight >  200000) return     2000 * COIN;
+    if (nHeight >  500000) return     6000 * COIN;
+    if (nHeight >  400000) return     5000 * COIN;
+    if (nHeight >  300000) return     4000 * COIN;
+    if (nHeight >  200000) return     3000 * COIN;
+    if (nHeight >  100000) return     2000 * COIN;
          
     return 1000 * COIN;
 }

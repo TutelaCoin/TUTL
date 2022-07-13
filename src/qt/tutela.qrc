@@ -285,7 +285,6 @@
         <file alias="img-logo-tutela">tutela/res/img/img-logo-tutela.svg</file>
         <file alias="bg-welcome">tutela/res/img/bg-welcome.png</file>
         <file alias="bg-welcome-container-png">tutela/res/img/bg-welcome-container.png</file>
-        <file alias="bg-dashboard-banner">tutela/res/img/bg-dashboard-banner.png</file>
         <file alias="ic-check-box-dark-active">tutela/res/img/ic-check-box-dark-active.svg</file>
         <file alias="ic-check-box-indeterminate">tutela/res/img/ic-check-box-indeterminate.svg</file>
         <file alias="ic-check-liliac-indeterminate">tutela/res/img/ic-check-liliac-indeterminate.svg</file>
