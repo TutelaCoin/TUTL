@@ -2004,24 +2004,24 @@ int64_t GetBlockValue(int nHeight)
     int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
     if (nMoneySupply >= Params().MaxMoneyOut()) return 0;
 
-    if (nHeight >   3000000) return       50 * COIN;
-    if (nHeight >   2500000) return       60 * COIN;
+    if (nHeight >   3000000) return       60 * COIN;
+    if (nHeight >   2500000) return       80 * COIN;
     if (nHeight >   2000000) return       70 * COIN;
-    if (nHeight >   1500000) return       80 * COIN;
-    if (nHeight >   1400000) return      120 * COIN;
-    if (nHeight >   1300000) return      140 * COIN; 
-    if (nHeight >   1200000) return      220 * COIN;
-    if (nHeight >   1100000) return      300 * COIN;
-    if (nHeight >   1000000) return      380 * COIN;
-    if (nHeight >    900000) return      440 * COIN;
-    if (nHeight >    800000) return      600 * COIN;
-    if (nHeight >    700000) return      700 * COIN;
-    if (nHeight >    600000) return      440 * COIN;
-    if (nHeight >    500000) return      300 * COIN;
-    if (nHeight >    400000) return      140 * COIN;
-    if (nHeight >    300000) return       80 * COIN;
-    if (nHeight >    200000) return       60 * COIN;
-    if (nHeight >    100000) return       25 * COIN;
+    if (nHeight >   1500000) return       90 * COIN;
+    if (nHeight >   1400000) return      150 * COIN;
+    if (nHeight >   1300000) return      175 * COIN; 
+    if (nHeight >   1200000) return      200 * COIN;
+    if (nHeight >   1100000) return      250 * COIN;
+    if (nHeight >   1000000) return      150 * COIN;
+    if (nHeight >    900000) return       25 * COIN;
+    if (nHeight >    800000) return       19 * COIN;
+    if (nHeight >    700000) return       18 * COIN;
+    if (nHeight >    600000) return       17 * COIN;
+    if (nHeight >    500000) return       16 * COIN;
+    if (nHeight >    400000) return       15 * COIN;
+    if (nHeight >    300000) return       14 * COIN;
+    if (nHeight >    200000) return       13 * COIN;
+    if (nHeight >    100000) return       12 * COIN;
     if (nHeight >         1) return       10 * COIN;
     if (nHeight >         0) return  5000000 * COIN;
 
@@ -2030,8 +2030,7 @@ int64_t GetBlockValue(int nHeight)
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool isZTUTLStake)
 {
-    if (nHeight > 300000) return GetBlockValue(nHeight) * 65 / 100;
-    if (nHeight >      1) return GetBlockValue(nHeight) * 80 / 100;
+    return GetBlockValue(nHeight) * 80 / 100;
 
     return 0;
 }
