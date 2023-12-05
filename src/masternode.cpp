@@ -297,6 +297,54 @@ int64_t CMasternode::GetLastPaid()
     return 0;
 }
 
+int64_t CMasternode::GetLastPaidBlock()
+{
+    CBlockIndex* pindexPrev = chainActive.Tip();
+    if (pindexPrev == NULL) return false;
+
+    CScript mnpayee;
+    mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
+
+    CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
+    ss << vin;
+    ss << sigTime;
+    //uint256 hash = ss.GetHash();
+
+    // use a deterministic offset to break a tie -- 2.5 minutes
+    //int64_t nOffset = hash.GetCompact(false) % 150;
+
+    if (chainActive.Tip() == NULL) return false;
+
+    const CBlockIndex* BlockReading = chainActive.Tip();
+
+    int nMnCount = mnodeman.CountEnabled() * 1.25;
+    int n = 0;
+    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
+        if (n >= nMnCount) {
+            return 0;
+        }
+        n++;
+
+        if (masternodePayments.mapMasternodeBlocks.count(BlockReading->nHeight)) {
+            /*
+                Search for this payee, with at least 2 votes. This will aid in consensus allowing the network 
+                to converge on the same payees quickly, then keep the same schedule.
+            */
+            if (masternodePayments.mapMasternodeBlocks[BlockReading->nHeight].HasPayeeWithVotes(mnpayee, 2)) {
+                return BlockReading->nHeight;
+            }
+        }
+
+        if (BlockReading->pprev == NULL) {
+            assert(BlockReading);
+            break;
+        }
+        BlockReading = BlockReading->pprev;
+    }
+
+    return 0;
+}
+
 std::string CMasternode::GetStatus()
 {
     switch (nActiveState) {
