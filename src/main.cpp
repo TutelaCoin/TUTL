@@ -2004,16 +2004,7 @@ int64_t GetBlockValue(int nHeight)
     int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
     if (nMoneySupply >= Params().MaxMoneyOut()) return 0;
 
-    if (nHeight >   3000000) return       60 * COIN;
-    if (nHeight >   2500000) return       80 * COIN;
-    if (nHeight >   2000000) return       70 * COIN;
-    if (nHeight >   1500000) return       90 * COIN;
-    if (nHeight >   1400000) return      150 * COIN;
-    if (nHeight >   1300000) return      175 * COIN; 
-    if (nHeight >   1200000) return      200 * COIN;
-    if (nHeight >   1100000) return      250 * COIN;
-    if (nHeight >   1000000) return      150 * COIN;
-    if (nHeight >    900000) return       25 * COIN;
+    if (nHeight >    805000) return      0.1 * COIN;
     if (nHeight >    800000) return       19 * COIN;
     if (nHeight >    700000) return       18 * COIN;
     if (nHeight >    600000) return       17 * COIN;
